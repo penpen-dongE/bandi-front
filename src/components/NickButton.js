@@ -1,6 +1,9 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
+import { Link, Route, BrowserRouter as Router } from "react-router-dom";
+import LifecycleAndFamily from './LifecycleAndFamily';
+// import App from '../App';
 
 
 const useStyles = makeStyles(theme => ({
@@ -21,21 +24,52 @@ export default function ContainedButtons() {
   const classes = useStyles();
 
   return (
-    <div>
-      <Button variant="contained" href="#contained-buttons1" className={classes.button}>
-        Zet
-      </Button>
-      <Button variant="contained" href="#contained-buttons2" className={classes.button}>
-        H
-      </Button>
-      <Button variant="contained" href="#contained-buttons3" className={classes.button}>
-        S
-      </Button>
-      <Button variant="contained" href="#contained-buttons4" className={classes.button}>
-        M
-      </Button>
+    <Router>
+      <React.Fragment>
 
-    </div>
+        <Link to='/family'>
+          <Button value="Zet" variant="contained"
+            onClick={function (e) {
+              this.props.btnClickedNickname();
+            }}
+            className={classes.button}>
+            Zet
+          </Button>
+        </Link>
+        <Link to='/family'>
+          <Button value="H" variant="contained"
+            onClick={function (e) {
+              this.props.btnClickedNickname();
+            }.bind(this)}
+            className={classes.button}>
+            H
+          </Button>
+        </Link>
+
+        <Link to='/family'>
+          <Button value="S" variant="contained"
+            onClick={function (e) {
+              this.props.btnClickedNickname();
+            }.bind(this)}
+            className={classes.button}>
+            S
+         </Button>
+        </Link>
+
+        <Link to='/family'>
+          <Button value="M" variant="contained"
+            onClick={function (e) {
+              this.props.btnClickedNickname();
+            }.bind(this)}
+            className={classes.button}>
+            M
+          </Button>
+        </Link>
+        {<main>
+          <Route path="/family" component={LifecycleAndFamily} />
+        </main>}
+      </React.Fragment>
+    </Router>
+
   );
 }
-

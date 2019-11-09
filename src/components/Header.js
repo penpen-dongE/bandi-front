@@ -1,5 +1,4 @@
 import React from 'react';
-//import './../styles/Header.css';
 import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -24,18 +23,20 @@ export default function ButtonAppBar() {
   const classes = useStyles();
 
   return (
-    <div className={classes.root}>
+
+    <header className={classes.root}>
       <AppBar position="static">
         <Toolbar>
-          <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
+          <IconButton edge="start" className={classes.menuButton} color="ivory" aria-label="menu">
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" className={classes.title}>
-            News
+            <h3>BandiBot</h3>
           </Typography>
-          <Button color="inherit">Login</Button>
+          <Button color="inherit">사용설명서</Button>
         </Toolbar>
       </AppBar>
-    </div>
+
+    </header>
   );
 }
