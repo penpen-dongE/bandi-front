@@ -20,53 +20,29 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-export default function ContainedButtons() {
+const buttonValues = ['Zet', 'H', 'S', 'M']
+
+export default function ContainedButtons({
+  onclick,
+}) {
   const classes = useStyles();
 
   return (
     <Router>
       <React.Fragment>
-
-        <Link to='/family'>
-          <Button value="Zet" variant="contained"
-            onClick={function (e) {
-              this.props.btnClickedNickname();
-            }}
-            className={classes.button}>
-            Zet
-          </Button>
-        </Link>
-        <Link to='/family'>
-          <Button value="H" variant="contained"
-            onClick={function (e) {
-              this.props.btnClickedNickname();
-            }.bind(this)}
-            className={classes.button}>
-            H
-          </Button>
-        </Link>
-
-        <Link to='/family'>
-          <Button value="S" variant="contained"
-            onClick={function (e) {
-              this.props.btnClickedNickname();
-            }.bind(this)}
-            className={classes.button}>
-            S
-         </Button>
-        </Link>
-
-        <Link to='/family'>
-          <Button value="M" variant="contained"
-            onClick={function (e) {
-              this.props.btnClickedNickname();
-            }.bind(this)}
-            className={classes.button}>
-            M
-          </Button>
-        </Link>
+        {
+          buttonValues.map(v => (
+            <Link to={`/${v}`}>
+              <Button value={v} variant="contained"
+                onClick={onclick}
+                className={classes.button}>
+                {v}
+              </Button>
+            </Link>
+          ))
+        }
         {<main>
-          <Route path="/family" component={LifecycleAndFamily} />
+          <Route path="/:family" component={LifecycleAndFamily} />
         </main>}
       </React.Fragment>
     </Router>
