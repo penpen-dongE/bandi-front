@@ -5,6 +5,7 @@ import Header from './components/Header';
 import Nickname from './components/Nickname';
 // import UserInfo from './components/UserInfo';
 import './styles/App.css';
+import LifecycleAndFamily from './components/LifecycleAndFamily';
 
 //import LifecycleAndFamily from './components/LifecycleAndFamily';
 
@@ -21,6 +22,10 @@ class App extends Component {
             <div className="nickname">
               <Nickname />
             </div>
+            {/* <div className="lifecycleandfamily">
+              <LifecycleAndFamily />
+            </div>
+            */}
           </React.Fragment>
         </div>
       </BrowserRouter>
