@@ -1,8 +1,8 @@
-import React, { Component, setState } from "react";
+import React, { Component } from "react";
 import Family from './Family';
 import LifeCycle from './LifeCycle';
+import axios from 'axios';
 // import Header from './Header';
-import Button from '@material-ui/core/Button';
 import './../styles/LifecycleAndFamily.css';
 
 
@@ -10,35 +10,63 @@ class LifecycleAndFamily extends Component {
 
     constructor(props) {
         super(props);
-        this.state = { isToggleOn: true };
-        this.handleClick = this.handleClick.bind(this);
+        this.state = {
+            clicked: true,
+            lifeValue: "",
+            familyValue: "",
+            appear: true,
+        };
+        this._checkedButton = this._checkedButton.bind(this);
+        this.selectAppear = this.selectAppear.bind(this);
     }
 
-    handleClick() {
-        this.setState(prevState => ({
-            isToggleOn: !prevState.isToggleOn
-        }));
+    _checkedButton = () => this.setState({ clicked: false });
+
+    selectAppear = () => this.setState({ appear: false });
+
+    btnClickedLife = (e) => {
+        axios.post('http://localhost:9000', {
+            lifeValue: this.state.lifeValue
+        }).then((response) => {
+            console.log(response)
+        }).catch((error) => {
+            console.log(error)
+        })
     }
+
+    btnClickedFamily = (e) => {
+        axios.post('http://localhost:9000', {
+            familyValue: this.state.familyValue
+        }).then((response) => {
+            console.log(response)
+        }).catch((error) => {
+            console.log(error)
+        })
+    }
+
 
     render() {
+
         console.log(this.props)
         return (
 
             <React.Fragment>
-
+                생애주기와 한부모 가족 중 한가지를 선택해 주세요!
                 <div className="lifecycle">
-                    <button onClick={this.handleClick} id='button'>
-                        {this.state.isToggleOn ? '생애주기' : <LifeCycle />}
-                    </button>
+                    {
+                        this.state.clicked
+                            ? <button title="생애주기" onClick={this._checkedButton}></button>
+                            : <LifeCycle onClick={this.btnClickedLife.bind(this)} />
+                    }
                 </div>
 
                 <div className="family">
-                    <button onClick={this.handleClick} id='button'>
-                        {this.state.isToggleOn ? '한부모가족' : <Family />}
-                    </button>
-
+                    {
+                        this.state.appear
+                            ? <button title="한부모가족" onClick={this.selectAppear}></button>
+                            : <Family onClick={this.btnClickedFamily.bind(this)} />
+                    }
                 </div>
-
             </React.Fragment>
 
         )

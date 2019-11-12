@@ -5,31 +5,49 @@ import Header from './components/Header';
 import Nickname from './components/Nickname';
 // import UserInfo from './components/UserInfo';
 import './styles/App.css';
-import LifecycleAndFamily from './components/LifecycleAndFamily';
-
-//import LifecycleAndFamily from './components/LifecycleAndFamily';
+// import LifecycleAndFamily from './components/LifecycleAndFamily';
+import Chat from './components/Chat';
 
 class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      chatState: false
+    };
+  }
 
   render() {
-    return (
-      <BrowserRouter>
-        <div className="bandibot">
-          <React.Fragment>
-            <div className="header">
-              <Header />
-            </div>
-            <div className="nickname">
-              <Nickname />
-            </div>
-            {/* <div className="lifecycleandfamily">
-              <LifecycleAndFamily />
-            </div>
-            */}
-          </React.Fragment>
-        </div>
-      </BrowserRouter>
+    const chatState = this.state.chatState
+
+    if (!chatState) {
+      return (
+        <BrowserRouter>
+          <div className="bandibot">
+            <React.Fragment>
+              <div className="header">
+                <Header />
+              </div>
+              <div className="nickname">
+                <Nickname />
+              </div>
+            </React.Fragment>
+          </div>
+        </BrowserRouter>
+      );
+    } return (
+      <div className="bandibot">
+        <React.Fragment>
+          <div className="header">
+            <Header />
+          </div>
+          <div className="chat">
+            <Chat />
+          </div>
+        </React.Fragment>
+      </div>
+
     );
+
   }
 
 }

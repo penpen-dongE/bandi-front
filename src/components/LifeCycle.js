@@ -1,44 +1,42 @@
 import React, { Component } from "react";
 import { Row, Col } from 'react-simple-flex-grid';
 import "react-simple-flex-grid/lib/main.css";
-import FavoriteBorder from '@material-ui/icons/FavoriteBorder';
-import Button from '@material-ui/core/Button';
+//import FavoriteBorder from '@material-ui/icons/FavoriteBorder';
 import { Link, Route, BrowserRouter as Router } from "react-router-dom";
-import Messages from "./Messages";
+import Chat from "./Chat";
 
-const buttonValues = ['Pregnancy', 'Infant', 'Teenager', 'Youth', 'Mature', 'Senior']
 class LifeCycle extends Component {
     render() {
+
+        const lifeValues = ['임신출산', '영유아', '청소년', '청년', '장년', '노인']
+
+        const lifeList = lifeValues.map((life) => (
+
+            <Col span={4}>
+                <Link to={`/${life}`}>
+                    <button onClick={this.props.btnClickedLife} id='button'>
+                        {life}
+                    </button>
+                </Link>
+            </Col>
+        ));
+
         return (
             <Router>
                 <React.Fragment>
-                    <div className='LifecycleSelect'>생애주기를 선택해 주세요</div>
+                    <div className='LifecycleSelect'></div>
                     <Row className='LifecycleStyle' gutter={20} >
-
-                        <Col span={4}><button id='button'>
-                            <FavoriteBorder /><br />임신출산</button>
-                        </Col>
-
-                        <Col span={4}><button id='button'>
-                            <FavoriteBorder /><br />영유아</button>
-                        </Col>
-                        <Col span={4}><button id='button'>
-                            <FavoriteBorder /><br />청소년</button>
-                        </Col>
-                        <Col span={4}><button id='button'>
-                            <FavoriteBorder /><br />청년</button>
-                        </Col>
-                        <Col span={4}><button id='button'>
-                            <FavoriteBorder /><br />장년</button>
-                        </Col>
-                        <Col span={4}><button id='button'>
-                            <FavoriteBorder /><br />노인</button>
-                        </Col>
+                        {lifeList}
                     </Row>
-                </React.Fragment >
-            </Router >
+                    <main>
+                        <Route path="/:life" component={Chat} />
+                        {/*<Route path="/:family" component={LifecycleAndFamily} />*/}
+                    </main>
+
+                </React.Fragment>
+            </Router>
         )
-    }
+    };
 }
 
 export default LifeCycle;

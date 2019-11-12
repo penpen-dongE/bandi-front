@@ -43,6 +43,7 @@ export default function ContainedButtons({
         }
         {<main>
           <Route path="/:family" component={LifecycleAndFamily} />
+          {/*<Route path="/:family" component={LifecycleAndFamily} />*/}
         </main>}
       </React.Fragment>
     </Router>
