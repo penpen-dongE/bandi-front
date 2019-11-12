@@ -25,7 +25,7 @@ class LifecycleAndFamily extends Component {
     selectAppear = () => this.setState({ appear: false });
 
     btnClickedLife = (e) => {
-        axios.post('http://localhost:9000', {
+        axios.post('http://localhost:8000', {
             lifeValue: this.state.lifeValue
         }).then((response) => {
             console.log(response)
@@ -35,7 +35,7 @@ class LifecycleAndFamily extends Component {
     }
 
     btnClickedFamily = (e) => {
-        axios.post('http://localhost:9000', {
+        axios.post('http://localhost:8000', {
             familyValue: this.state.familyValue
         }).then((response) => {
             console.log(response)
@@ -55,7 +55,7 @@ class LifecycleAndFamily extends Component {
                 <div className="lifecycle">
                     {
                         this.state.clicked
-                            ? <button title="생애주기" onClick={this._checkedButton}></button>
+                            ? <button title="생애주기" onClick={this._checkedButton}>생애주기</button>
                             : <LifeCycle onClick={this.btnClickedLife.bind(this)} />
                     }
                 </div>
@@ -63,7 +63,7 @@ class LifecycleAndFamily extends Component {
                 <div className="family">
                     {
                         this.state.appear
-                            ? <button title="한부모가족" onClick={this.selectAppear}></button>
+                            ? <button title="한부모가족" onClick={this.selectAppear}>한부모가족</button>
                             : <Family onClick={this.btnClickedFamily.bind(this)} />
                     }
                 </div>

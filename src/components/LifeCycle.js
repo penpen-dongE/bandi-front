@@ -30,7 +30,6 @@ class LifeCycle extends Component {
                     </Row>
                     <main>
                         <Route path="/:life" component={Chat} />
-                        {/*<Route path="/:family" component={LifecycleAndFamily} />*/}
                     </main>
 
                 </React.Fragment>
