@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import { Row, Col } from 'react-simple-flex-grid';
 import "react-simple-flex-grid/lib/main.css";
-//import FavoriteBorder from '@material-ui/icons/FavoriteBorder';
 import { Link, Route, BrowserRouter as Router } from "react-router-dom";
 import Chat from "./Chat";
+import "./../styles/LifeCycle.css"
 
 class LifeCycle extends Component {
     render() {
@@ -11,10 +11,10 @@ class LifeCycle extends Component {
         const lifeValues = ['임신출산', '영유아', '청소년', '청년', '장년', '노인']
 
         const lifeList = lifeValues.map((life) => (
-
+            
             <Col span={4}>
-                <Link to={`/${life}`}>
-                    <button onClick={this.props.btnClickedLife} id='button'>
+                <Link to={`/lifeandfamily/${life}`}>
+                    <button id="btn" onClick={this.props.btnClickedLife} id='button'>
                         {life}
                     </button>
                 </Link>
@@ -24,12 +24,12 @@ class LifeCycle extends Component {
         return (
             <Router>
                 <React.Fragment>
-                    <div className='LifecycleSelect'></div>
-                    <Row className='LifecycleStyle' gutter={20} >
+                    <div className='LifecycleSelect'>생애주기 중 하나를 골라주세요</div>
+                    <Row className='LifecycleStyle' gutter={30}>
                         {lifeList}
                     </Row>
                     <main>
-                        <Route path="/:life" component={Chat} />
+                        <Route path="/lifeandfamily/:life" component={Chat} />
                     </main>
 
                 </React.Fragment>

@@ -1,33 +1,13 @@
+.select {
+  text-align: center;
+  font-size: 16px;
+  padding-top: 25px;
+  padding-bottom: 10px;
+}
 
-body {
-    background-image: url('/picture.jpg');
-    background-size: cover;
-    font-family: 'SeoulNamsan';
-  }
-  
-  .bandibot {
-    width: 400px;
-    height: 550px;
-  
-    border: 2px solid #efebe9;
-  
-    position: absolute;
-    top: 50%; 
-    left: 50%;
-    transform: translate(-50%, -50%);
-  }
-  
-  
-  .lifecycle {
-    height: 40%;
-    
-    margin-top: 20px;
-    background-color: white;
-    text-align: center;
-  }
-  
-  .family {
-    height: 46%;
-    padding-top: 10px;
-    background-color: white;
-  }
+.button{
+ display: inline-block;
+ margin-left: 20px;
+ margin-right: 20px;
+ margin-top: 10px;
+}

@@ -16,7 +16,7 @@ const useStyles = makeStyles(theme => ({
     width: 150,
     padding: '0 30px',
     justifyContent: 'space-around',
-    fontSize: 25
+    fontSize: 25,
   }
 }));
 
@@ -32,7 +32,7 @@ export default function ContainedButtons({
       <React.Fragment>
         {
           buttonValues.map(v => (
-            <Link to={`/${v}`}>
+            <Link to={`/${v}`} style={{ textDecoration: 'none' }}>
               <Button value={v} variant="contained"
                 onClick={onclick}
                 className={classes.button}>
@@ -42,8 +42,7 @@ export default function ContainedButtons({
           ))
         }
         {<main>
-          <Route path="/:family" component={LifecycleAndFamily} />
-          {/*<Route path="/:family" component={LifecycleAndFamily} />*/}
+          <Route path="/:lifeandfamily" component={LifecycleAndFamily} />
         </main>}
       </React.Fragment>
     </Router>

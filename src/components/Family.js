@@ -15,7 +15,7 @@ class Family extends Component {
 
         const familyList = familyValues.map((fam) => (
             <Col span={4}>
-                <Link to={`/${fam}`}>
+                <Link to={`/lifeandfamily/${fam}`}>
                     <button id='button'>
                         {fam}
                     </button>
@@ -33,7 +33,7 @@ class Family extends Component {
                         {familyList}
                     </Row>
                     <main>
-                        <Route path="/:family" component={Chat} />
+                        <Route path="/lifeandfamily/:family" component={Chat} />
                     </main>
                 </React.Fragment>
             </Router>

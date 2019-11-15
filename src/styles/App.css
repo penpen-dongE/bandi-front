@@ -12,7 +12,7 @@ body {
 
 .bandibot {
   width: 400px;
-  height: 550px;
+  height: 600px;
 
   border: 2px solid #efebe9;
 
@@ -30,12 +30,7 @@ body {
   line-height: 79px;
 }
 
-.family {
-  height: 40%;
-  background-color: white;
-}
-
 .nickname {
-  height: 46%;
+  height: 86%;
   background-color: white;
 }
