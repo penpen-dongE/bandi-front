@@ -11,10 +11,13 @@ class LifeCycle extends Component {
         const lifeValues = ['임신출산', '영유아', '청소년', '청년', '장년', '노인']
 
         const lifeList = lifeValues.map((life) => (
-            
+
             <Col span={4}>
                 <Link to={`/lifeandfamily/${life}`}>
-                    <button id="btn" onClick={this.props.btnClickedLife} id='button'>
+                    <button
+                        onClick={this.props.btnClickedLife}
+                        onChange={this.props.chatStateChange}
+                        id='button'>
                         {life}
                     </button>
                 </Link>

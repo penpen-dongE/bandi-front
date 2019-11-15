@@ -26,7 +26,7 @@ class Nickname extends Component {
             <React.Fragment>
                 <div className='nicknameSelect'>반디봇과 대화할 닉네임을 선택해 주세요</div>
                 <div className='wrapper'>
-                    <NickButton onclick={
+                    <NickButton {...this.state} {...this.props.state} onclick={
                         this.btnClickedNickname.bind(this)
                     }
                     />

@@ -9,7 +9,8 @@ class Chat extends Component {
         super(props)
 
         this.state = {
-            chatText: []
+            chatText: [],
+            chatState: false,
         }
 
         this.textChanged = this.textChanged.bind(this)

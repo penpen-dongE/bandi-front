@@ -13,10 +13,17 @@ class App extends Component {
     this.state = {
       chatState: false
     };
+    this._chatStateChange = this._chatStateChange.bind(this);
   }
 
+  _chatStateChange(e) {
+    this.setState({
+      chatState: true
+    })
+  };
+
   render() {
-    const chatState = this.state.chatState
+    let { chatState } = this.state.chatState
 
     if (!chatState) {
       return (
@@ -27,25 +34,27 @@ class App extends Component {
                 <Header />
               </div>
               <div className="nickname">
-                <Nickname />
+                <Nickname {...this.state} />
               </div>
             </React.Fragment>
           </div>
         </BrowserRouter>
       );
-    } return (
-      <div className="bandibot">
-        <React.Fragment>
-          <div className="header">
-            <Header />
-          </div>
-          <div className="chat">
-            <Chat />
-          </div>
-        </React.Fragment>
-      </div>
+    } else {
+      return (
+        <div className="bandibot">
+          <React.Fragment>
+            <div className="header">
+              <Header />
+            </div>
+            <div className="chat">
+              <Chat {...this.state} chatStateChange={this._chatStateChange.bind(this)} />
+            </div>
+          </React.Fragment>
+        </div>
 
-    );
+      );
+    }
 
   }
 
