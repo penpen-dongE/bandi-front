@@ -1,15 +1,22 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
 import axios from 'axios';
 //import ReactDOM from 'react-dom';​
 //import dialogflow from 'dialogflow';
-
+/*
+messags: ['text1', 'text2']
+messags: [{
+    from: 'me',
+    text: 'text1',
+}]
+*/
 class Chat extends Component {
 
     constructor(props) {
         super(props)
 
         this.state = {
-            chatText: [],
+            messages: [],
+            chatText: '',
             chatState: false,
         }
 
@@ -19,15 +26,22 @@ class Chat extends Component {
 
     textChanged(e) {
         this.setState({
-            [e.target.chatText]: e.target.value
+            chatText: e.target.value
         })
     };
 
     onClicked() {
-        axios.get("http://localhost:8000/chat", { chatText: this.state.chatText })
+        this.setState(({ messages, chatText }) => ({
+            chatText: '',
+            messages: messages.concat({
+                from: 'me',
+                text: chatText,
+            }),
+        }))
+        axios.post("http://localhost:8000/chat", { chatText: this.state.chatText })
             .then((response) => {
-                this.setState(({ chatText }) => (
-                    { chatText: chatText.concat(response.data) }))
+                this.setState(({ messages }) => (
+                    { messages: messages.concat(response.data) }))
                 console.log(response.data)
                 /* 
                     setTimeout(() => {
@@ -50,14 +64,15 @@ class Chat extends Component {
                 </div>
 
                 <div className='wrapper'>
-                    {this.state.chatText.map((chatText, index) => {
+                    {this.state.messages.map((message, index) => {
                         return (
                             <div key={index}>
-                                {chatText.data}
+                                {message.text}
                             </div>
                         )
                     })
                     }
+
                 </div>
             </React.Fragment>
         )

@@ -48,7 +48,7 @@ class App extends Component {
               <Header />
             </div>
             <div className="chat">
-              <Chat {...this.state} chatStateChange={this._chatStateChange.bind(this)} />
+              <Chat chatState={this.state.chatState} chatStateChange={this._chatStateChange.bind(this)} />
             </div>
           </React.Fragment>
         </div>

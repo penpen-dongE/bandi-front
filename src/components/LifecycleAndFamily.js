@@ -60,13 +60,13 @@ class LifecycleAndFamily extends Component {
 
                     {
                         this.state.clicked
-                            ? <Button title="생애주기" onClick={this._checkedButton} variant="outlined" color="primary" size="large">생애주기</Button>
+                            ? this.state.appear && <Button title="생애주기" onClick={this._checkedButton} variant="outlined" color="primary" size="large">생애주기</Button>
                             : <LifeCycle {...this.props.state} onClick={this.btnClickedLife.bind(this)} />
 
                     }
                     {
                         this.state.appear
-                            ? <Button title="한부모가족" onClick={this.selectAppear} variant="outlined" color="primary" size="large">한부모가족</Button>
+                            ? this.state.clicked && <Button title="한부모가족" onClick={this.selectAppear} variant="outlined" color="primary" size="large">한부모가족</Button>
                             : <Family {...this.props.state} onClick={this.btnClickedFamily.bind(this)} />
                     }
                 </div>
