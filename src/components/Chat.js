@@ -18,6 +18,7 @@ class Chat extends Component {
             messages: [],
             chatText: '',
             chatState: false,
+            isUserAlreadyReceived: false
         }
 
         this.textChanged = this.textChanged.bind(this)
@@ -40,8 +41,16 @@ class Chat extends Component {
         }))
         axios.post("http://localhost:8000/chat", { chatText: this.state.chatText })
             .then((response) => {
-                this.setState(({ messages }) => (
-                    { messages: messages.concat(response.data) }))
+                this.setState(({ messages, chatText }) => (
+                    {
+                        messages: messages.concat(
+                            {
+                                from: 'bot',
+                                text: response.data,
+                            }
+                        )
+                    }
+                ))
                 console.log(response.data)
                 /* 
                     setTimeout(() => {
@@ -52,13 +61,17 @@ class Chat extends Component {
             .catch((error) => {
                 console.error(error)
             })
+        if (!this.state.isUserAlreadyReceived) {
+            axios
+            true로
+        }
     }
     render() {
         return (
             <React.Fragment>
                 <div>
                     <input value={this.state.chatText} onChange={this.textChanged} />
-                    <button type="button" onClick={this.onClicked}>
+                    <button type="button" onClick={this.onClicked} >
                         send
                     </button>
                 </div>
