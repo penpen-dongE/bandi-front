@@ -11,44 +11,46 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      chatState: false
+      chatState: false,
     };
     this._chatStateChange = this._chatStateChange.bind(this);
   }
 
-  _chatStateChange(e) {
+  _chatStateChange = (e) => {
+    //console.log(e.target.value);
     this.setState({
       chatState: true
     })
   };
 
   render() {
-    let { chatState } = this.state.chatState
-
+    let { chatState } = this.state;
     if (!chatState) {
       return (
         <BrowserRouter>
-          <div className="bandibot">
+          <div className="bandibot" >
             <React.Fragment>
               <div className="header">
                 <Header />
               </div>
               <div className="nickname">
-                <Nickname {...this.state} />
+                <Nickname onChange={this._chatStateChange} />
               </div>
             </React.Fragment>
           </div>
         </BrowserRouter>
       );
     } else {
+      console.log(this.props);
       return (
+
         <div className="bandibot">
           <React.Fragment>
             <div className="header">
               <Header />
             </div>
             <div className="chat">
-              <Chat chatState={this.state.chatState} chatStateChange={this._chatStateChange.bind(this)} />
+              <Chat />
             </div>
           </React.Fragment>
         </div>

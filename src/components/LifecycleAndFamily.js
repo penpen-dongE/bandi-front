@@ -14,23 +14,23 @@ class LifecycleAndFamily extends Component {
             lifeValue: "",
             familyValue: "",
             appear: true,
-            toggle: false,
         };
+
         this._checkedButton = this._checkedButton.bind(this);
         this.selectAppear = this.selectAppear.bind(this);
-        //this._buttonDisappear = this._buttonDisappear.bind(this);
-        //this.selectDisapper = this.selectDisapper.bind(this);
+
     }
 
-    _checkedButton = () => this.setState({ clicked: false, appear: true })
+    _checkedButton = () => this.setState({ clicked: false, })
     //_buttonDisappear = () => this.setState({ clicked: true });
 
-    selectAppear = () => this.setState({ appear: false, clicked: true });
+    selectAppear = () => this.setState({ appear: false, });
     //selectDisapper = () => this.setState({ appear: true });
 
     btnClickedLife = (e) => {
-        axios.post('http://localhost:9000', {
-            lifeValue: this.state.lifeValue
+
+        axios.post('/chat', {
+            lifeValue: this.state.lifeValue,
         }).then((response) => {
             console.log(response)
         }).catch((error) => {
@@ -39,8 +39,10 @@ class LifecycleAndFamily extends Component {
     }
 
     btnClickedFamily = (e) => {
-        axios.post('http://localhost:9000', {
-            familyValue: this.state.familyValue
+
+        axios.post('/chat', {
+            familyValue: this.state.familyValue,
+
         }).then((response) => {
             console.log(response)
         }).catch((error) => {
@@ -50,24 +52,31 @@ class LifecycleAndFamily extends Component {
 
     render() {
 
-        console.log(this.props)
+        const { onChange } = this.props;
+        console.log(onChange);
+
+
 
         return (
 
             <React.Fragment>
                 <div className="select">생애주기와 한부모 가족 중 한가지를 선택해 주세요!</div>
-                <div className="button">
+                <div className="button" >
 
                     {
                         this.state.clicked
                             ? this.state.appear && <Button title="생애주기" onClick={this._checkedButton} variant="outlined" color="primary" size="large">생애주기</Button>
-                            : <LifeCycle {...this.props.state} onClick={this.btnClickedLife.bind(this)} />
+                            : <LifeCycle
+                                onChange={onChange}
+                                onClick={this.btnClickedLife.bind(this)} />
 
                     }
                     {
                         this.state.appear
                             ? this.state.clicked && <Button title="한부모가족" onClick={this.selectAppear} variant="outlined" color="primary" size="large">한부모가족</Button>
-                            : <Family {...this.props.state} onClick={this.btnClickedFamily.bind(this)} />
+                            : <Family
+                                onChange={e => onchange({ chatState: true })}
+                                onClick={this.btnClickedFamily.bind(this)} />
                     }
                 </div>
             </React.Fragment>

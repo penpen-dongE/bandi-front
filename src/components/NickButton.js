@@ -23,11 +23,15 @@ const useStyles = makeStyles(theme => ({
 const buttonValues = ['Zet', 'H', 'S', 'M']
 
 export default function ContainedButtons({
-  onclick,
+  onclick, onChange
 }) {
   const classes = useStyles();
 
+  console.log(onChange);
+  console.log(onclick);
+
   return (
+
     <Router>
       <React.Fragment>
         {
@@ -35,6 +39,8 @@ export default function ContainedButtons({
             <Link to={`/${v}`} style={{ textDecoration: 'none' }}>
               <Button value={v} variant="contained"
                 onClick={onclick}
+                onChange={onChange}
+
                 className={classes.button}>
                 {v}
               </Button>

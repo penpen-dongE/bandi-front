@@ -7,13 +7,16 @@ class Nickname extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            value: ''
+            value: '',
+
         };
     }
 
     btnClickedNickname = (e) => {
-        axios.post('/user', {
-            value: this.state.value
+
+        axios.post('/chat', {
+            value: this.state.value,
+            chatstate: this.state.chatstate,
         }).then((response) => {
             console.log(response)
         }).catch((error) => {
@@ -22,17 +25,22 @@ class Nickname extends Component {
     }
 
     render() {
+
         return (
             <React.Fragment>
                 <div className='nicknameSelect'>반디봇과 대화할 닉네임을 선택해 주세요</div>
                 <div className='wrapper'>
-                    <NickButton {...this.state} {...this.props.state} onclick={
-                        this.btnClickedNickname.bind(this)
-                    }
+                    <NickButton
+
+                        {...this.props}
+                        onclick={
+                            this.btnClickedNickname.bind(this)
+                        }
                     />
                 </div>
             </React.Fragment>
         )
+
     }
 }
 

@@ -17,7 +17,7 @@ class Chat extends Component {
         this.state = {
             messages: [],
             chatText: '',
-            chatState: false,
+            chatState: true,
             isUserAlreadyReceived: false
         }
 
@@ -62,8 +62,24 @@ class Chat extends Component {
                 console.error(error)
             })
         if (!this.state.isUserAlreadyReceived) {
-            axios
-            true로
+            axios.post("http://localhost:9000/", { chatText: this.state.chatText })
+                .then((response) => {
+                    this.setState(({ messages }) => (
+                        {
+                            messages: messages.concat(
+                                {
+                                    from: 'bot',
+                                    text: response.data,
+                                }
+                            )
+                        }
+                    ))
+                    console.log(response.data)
+                })
+                .catch((error) => {
+                    console.error(error)
+                })
+            this.setState({ isUserAlreadyReceived: true });
         }
     }
     render() {

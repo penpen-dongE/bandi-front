@@ -7,6 +7,7 @@ import "./../styles/LifeCycle.css"
 
 class LifeCycle extends Component {
     render() {
+        console.log(this.props);
 
         const lifeValues = ['임신출산', '영유아', '청소년', '청년', '장년', '노인']
 
@@ -16,6 +17,7 @@ class LifeCycle extends Component {
                 <Link to={`/lifeandfamily/${life}`}>
                     <button
                         onClick={this.props.btnClickedLife}
+                        {...this.props}
                         onChange={this.props.chatStateChange}
                         id='button'>
                         {life}

@@ -9,15 +9,25 @@ import Chat from "./Chat";
 
 // <button><img src="./../../bandibot_asset/img/family1.png"/>한부모가족</button>  이미지가 안나옴 ㅠ
 class Family extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            chatstate: false,
+        };
+    }
 
     render() {
+        console.log(this.props.chatstatef);
 
         const familyValues = ['한부모가족', '조손가족', '청소년 한부모가족']
 
         const familyList = familyValues.map((fam) => (
             <Col span={4}>
                 <Link to={`/lifeandfamily/${fam}`}>
-                    <button onClick={this.props.chatStateChange} id='button'>
+
+                    <button
+                        onClick={this.props.onchange}
+                        id='button'>
                         {fam}
                     </button>
                 </Link>
