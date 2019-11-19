@@ -1,0 +1,30 @@
+.chatwindow {
+    height: 430px;
+    border: 10px, solid,#0747a7;
+    border-radius: 10px;
+    background-color: white;
+    padding: 10px;
+    overflow: auto;
+}
+
+.btn {
+    margin-top: 10px;
+    margin-left: 90px;
+    display: inline-block;
+}
+
+.me {
+    background: #0747a7;
+    color: white;
+    padding: 4px;
+    margin: 10px;
+    font-weight: bold;
+}
+.bot {
+    background-color: #4c9689;
+    color: white;
+    padding: 4px;
+    margin: 10px;
+    font-weight: bold;
+}
+

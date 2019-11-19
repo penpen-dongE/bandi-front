@@ -17,7 +17,7 @@ class Family extends Component {
     }
 
     render() {
-        console.log(this.props.chatstatef);
+        console.log(this.props);
 
         const familyValues = ['한부모가족', '조손가족', '청소년 한부모가족']
 
@@ -26,7 +26,6 @@ class Family extends Component {
                 <Link to={`/lifeandfamily/${fam}`}>
 
                     <button
-                        onClick={this.props.onchange}
                         id='button'>
                         {fam}
                     </button>
@@ -44,7 +43,8 @@ class Family extends Component {
                         {familyList}
                     </Row>
                     <main>
-                        <Route path="/lifeandfamily/:family" component={Chat} />
+                        <Route path="/lifeandfamily/:family"
+                            component={() => <Chat onClick={this.props.onClick()} />} />
                     </main>
                 </React.Fragment>
             </Router>

@@ -16,9 +16,7 @@ class LifeCycle extends Component {
             <Col span={4}>
                 <Link to={`/lifeandfamily/${life}`}>
                     <button
-                        onClick={this.props.btnClickedLife}
-                        {...this.props}
-                        onChange={this.props.chatStateChange}
+
                         id='button'>
                         {life}
                     </button>
@@ -34,7 +32,8 @@ class LifeCycle extends Component {
                         {lifeList}
                     </Row>
                     <main>
-                        <Route path="/lifeandfamily/:life" component={Chat} />
+                        <Route path="/lifeandfamily/:life"
+                            component={() => <Chat onClick={this.props.onClick()} />} />
                     </main>
 
                 </React.Fragment>

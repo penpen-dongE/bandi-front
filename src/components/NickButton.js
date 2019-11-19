@@ -39,8 +39,6 @@ export default function ContainedButtons({
             <Link to={`/${v}`} style={{ textDecoration: 'none' }}>
               <Button value={v} variant="contained"
                 onClick={onclick}
-                onChange={onChange}
-
                 className={classes.button}>
                 {v}
               </Button>
@@ -48,10 +46,10 @@ export default function ContainedButtons({
           ))
         }
         {<main>
-          <Route path="/:lifeandfamily" component={LifecycleAndFamily} />
+          <Route path="/:lifeandfamily"
+            component={() => <LifecycleAndFamily onChange={onChange} />} />
         </main>}
       </React.Fragment>
     </Router>
-
   );
 }

@@ -51,11 +51,7 @@ class LifecycleAndFamily extends Component {
     }
 
     render() {
-
-        const { onChange } = this.props;
-        console.log(onChange);
-
-
+        console.log(this.props);
 
         return (
 
@@ -65,18 +61,18 @@ class LifecycleAndFamily extends Component {
 
                     {
                         this.state.clicked
-                            ? this.state.appear && <Button title="생애주기" onClick={this._checkedButton} variant="outlined" color="primary" size="large">생애주기</Button>
+                            ? this.state.appear && <Button title="생애주기" onClick={this._checkedButton}
+                                variant="outlined" color="primary" size="large">생애주기</Button>
                             : <LifeCycle
-                                onChange={onChange}
-                                onClick={this.btnClickedLife.bind(this)} />
+                                onClick={this.props.onChange} />
 
                     }
                     {
                         this.state.appear
-                            ? this.state.clicked && <Button title="한부모가족" onClick={this.selectAppear} variant="outlined" color="primary" size="large">한부모가족</Button>
+                            ? this.state.clicked && <Button title="한부모가족" onClick={this.selectAppear}
+                                variant="outlined" color="primary" size="large">한부모가족</Button>
                             : <Family
-                                onChange={e => onchange({ chatState: true })}
-                                onClick={this.btnClickedFamily.bind(this)} />
+                                onClick={this.props.onChange} />
                     }
                 </div>
             </React.Fragment>

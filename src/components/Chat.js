@@ -1,14 +1,10 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-//import ReactDOM from 'react-dom';​
-//import dialogflow from 'dialogflow';
-/*
-messags: ['text1', 'text2']
-messags: [{
-    from: 'me',
-    text: 'text1',
-}]
-*/
+import "./../styles/Chat.css"
+import TextField from '@material-ui/core/TextField';
+import Button from '@material-ui/core/Button';
+import { makeStyles } from '@material-ui/core/styles';
+
 class Chat extends Component {
 
     constructor(props) {
@@ -17,7 +13,7 @@ class Chat extends Component {
         this.state = {
             messages: [],
             chatText: '',
-            chatState: true,
+            chatState: false,
             isUserAlreadyReceived: false
         }
 
@@ -39,7 +35,7 @@ class Chat extends Component {
                 text: chatText,
             }),
         }))
-        axios.post("http://localhost:8000/chat", { chatText: this.state.chatText })
+        axios.post("http://localhost:9000/chat", { chatText: this.state.chatText })
             .then((response) => {
                 this.setState(({ messages, chatText }) => (
                     {
@@ -51,73 +47,44 @@ class Chat extends Component {
                         )
                     }
                 ))
-                console.log(response.data)
-                /* 
-                    setTimeout(() => {
-                    setMessage(mock2.message)
-                    }, 3000) 
-                */
+                //console.log(this.state.messages[0].from)
             })
             .catch((error) => {
                 console.error(error)
             })
-        if (!this.state.isUserAlreadyReceived) {
-            axios.post("http://localhost:9000/", { chatText: this.state.chatText })
-                .then((response) => {
-                    this.setState(({ messages }) => (
-                        {
-                            messages: messages.concat(
-                                {
-                                    from: 'bot',
-                                    text: response.data,
-                                }
-                            )
-                        }
-                    ))
-                    console.log(response.data)
-                })
-                .catch((error) => {
-                    console.error(error)
-                })
-            this.setState({ isUserAlreadyReceived: true });
-        }
+
+        //if (!this.state.isUserAlreadyReceived) {
+        //    axios
+        //    true로
+        //}
     }
+
     render() {
         return (
             <React.Fragment>
-                <div>
-                    <input value={this.state.chatText} onChange={this.textChanged} />
-                    <button type="button" onClick={this.onClicked} >
-                        send
-                    </button>
-                </div>
-
                 <div className='wrapper'>
-                    {this.state.messages.map((message, index) => {
-                        return (
-                            <div key={index}>
-                                {message.text}
-                            </div>
-                        )
-                    })
-                    }
-
+                    <div className='chatwindow'>
+                        {
+                            this.state.messages.map((message, index) => {
+                                return (
+                                    <div className={message.from} key={index}>
+                                        {message.text}
+                                    </div>
+                                )
+                            })
+                        }
+                    </div>
+                    <div>
+                        <TextField label="질문을 적어주세요." value={this.state.chatText} onChange={this.textChanged} />
+                        <div className='btn'>
+                            <Button variant="contained" color="primary" onClick={this.onClicked} >
+                                send</Button>
+                        </div>
+                    </div>
                 </div>
             </React.Fragment>
         )
     }
 }
-
 export default Chat;
 
-
-/*
-
-프론트에서는 이런식으로 하겠죠...?
-axios.get("/chat", { chatText: this.state.blabla })
-.then((response) => {
-  // 여기서 채팅 컴포넌트를 하나 만들고, 그때 서버에서 온(실제로는 Dialogflow에서 온) 메시지를 넣어준다
-
-})
-
-*/
