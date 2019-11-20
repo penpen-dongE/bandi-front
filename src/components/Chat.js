@@ -35,6 +35,22 @@ class Chat extends Component {
                 text: chatText,
             }),
         }))
+        axios.post("http://localhost:5000/test", { chatText: this.state.chatText })
+            .then((response) => {
+                this.setState(({ messages, chatText }) => (
+                    {
+                        messages: messages.concat(
+                            {
+                                from: 'ai',
+                                text: response.data,
+                            }
+                        )
+                    }
+                ))
+            })
+            .catch((error) => {
+                console.error(error)
+            })
         axios.post("http://localhost:9000/chat", { chatText: this.state.chatText })
             .then((response) => {
                 this.setState(({ messages, chatText }) => (
