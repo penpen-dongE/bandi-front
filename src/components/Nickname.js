@@ -31,7 +31,6 @@ class Nickname extends Component {
                 <div className='nicknameSelect'>반디봇과 대화할 닉네임을 선택해 주세요</div>
                 <div className='wrapper'>
                     <NickButton
-
                         {...this.props}
                         onclick={
                             this.btnClickedNickname.bind(this)

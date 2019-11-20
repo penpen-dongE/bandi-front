@@ -37,6 +37,7 @@ class Chat extends Component {
         }))
         axios.post("http://localhost:5000/test", { chatText: this.state.chatText })
             .then((response) => {
+                console.log(response)
                 this.setState(({ messages, chatText }) => (
                     {
                         messages: messages.concat(
