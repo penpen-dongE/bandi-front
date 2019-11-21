@@ -3,7 +3,7 @@ import axios from 'axios';
 import "./../styles/Chat.css"
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
-import { makeStyles } from '@material-ui/core/styles';
+
 
 class Chat extends Component {
 
@@ -81,6 +81,9 @@ class Chat extends Component {
             <React.Fragment>
                 <div className='wrapper'>
                     <div className='chatwindow'>
+                        <div className='bot'>
+                            {`${this.props.v} 님 안녕하세요.`}
+                        </div>
                         {
                             this.state.messages.map((message, index) => {
                                 return (
@@ -91,8 +94,10 @@ class Chat extends Component {
                             })
                         }
                     </div>
-                    <div>
-                        <TextField label="질문을 적어주세요." value={this.state.chatText} onChange={this.textChanged} />
+                    <div className='input'>
+                        <div className='text'>
+                            <TextField label="질문을 적어주세요." value={this.state.chatText} onChange={this.textChanged} />
+                        </div>
                         <div className='btn'>
                             <Button variant="contained" color="primary" onClick={this.onClicked} >
                                 send</Button>
@@ -103,5 +108,5 @@ class Chat extends Component {
         )
     }
 }
-export default Chat;
 
+export default Chat;

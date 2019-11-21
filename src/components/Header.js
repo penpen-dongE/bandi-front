@@ -16,15 +16,15 @@ import CloseIcon from '@material-ui/icons/Close';
 const useStyles = makeStyles(theme => ({
   root: {
     flexGrow: 1,
-    
+
   },
   title: {
     flexGrow: 1,
-    marginRight: theme.spacing(-7), 
-    
+    marginRight: theme.spacing(-7),
+
   },
   button: {
-    background : '#f9fbe7'
+    background: '#f9fbe7'
   }
 }));
 
@@ -60,7 +60,7 @@ const DialogTitle = withStyles(styles)(props => {
 const DialogContent = withStyles(theme => ({
   root: {
     padding: theme.spacing(5),
-  
+
   },
 }))(MuiDialogContent);
 
@@ -83,16 +83,16 @@ export default function Header() {
           <Typography variant="h6" className={classes.title}>
             <h3>BandiBot</h3>
           </Typography>
-          <Button  className={classes.button} onClick={handleClickOpen}>사용설명서</Button>
+          <Button className={classes.button} onClick={handleClickOpen}>사용설명서</Button>
         </Toolbar>
       </AppBar>
 
       <Dialog onClose={handleClose} aria-labelledby="customized-dialog-title" open={open}>
         <DialogTitle id="customized-dialog-title" onClose={handleClose}>
-          반디봇 사용설명서 
+          반디봇 사용설명서
         </DialogTitle>
         <DialogContent dividers>
-           '처음으로' 라고 쓰시면 첫화면으로 갑니다.
+          닉네임을 선택해주시고 해당되는 생애주기 혹은 한부모가족 형태를 선택하시면 반디봇과 대화하실 수 있습니다. (SEND옆에 버튼을 클릭하시면 질문예시를 확인하실 수 있어요. ^^)
         </DialogContent>
       </Dialog>
 

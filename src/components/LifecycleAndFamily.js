@@ -18,14 +18,11 @@ class LifecycleAndFamily extends Component {
 
         this._checkedButton = this._checkedButton.bind(this);
         this.selectAppear = this.selectAppear.bind(this);
-
     }
 
     _checkedButton = () => this.setState({ clicked: false, })
-    //_buttonDisappear = () => this.setState({ clicked: true });
 
     selectAppear = () => this.setState({ appear: false, });
-    //selectDisapper = () => this.setState({ appear: true });
 
     btnClickedLife = (e) => {
 
@@ -51,29 +48,32 @@ class LifecycleAndFamily extends Component {
     }
 
     render() {
-        console.log(this.props);
+        console.log(this.props.v);
 
         return (
 
             <React.Fragment>
                 <div className="select">생애주기와 한부모 가족 중 한가지를 선택해 주세요!</div>
-                <div className="button" >
+                <div className='btn'>
+                    <div className="btn1">
+                        {
+                            this.state.clicked
+                                ? this.state.appear && <Button title="생애주기" onClick={this._checkedButton}
+                                    variant="outlined" color="primary" size="large">생애주기</Button>
+                                : <LifeCycle
+                                    onClick={this.props.onChange} />
 
-                    {
-                        this.state.clicked
-                            ? this.state.appear && <Button title="생애주기" onClick={this._checkedButton}
-                                variant="outlined" color="primary" size="large">생애주기</Button>
-                            : <LifeCycle
-                                onClick={this.props.onChange} />
-
-                    }
-                    {
-                        this.state.appear
-                            ? this.state.clicked && <Button title="한부모가족" onClick={this.selectAppear}
-                                variant="outlined" color="primary" size="large">한부모가족</Button>
-                            : <Family
-                                onClick={this.props.onChange} />
-                    }
+                        }
+                    </div>
+                    <div className="btn2">
+                        {
+                            this.state.appear
+                                ? this.state.clicked && <Button title="한부모가족" onClick={this.selectAppear}
+                                    variant="outlined" color="primary" size="large">한부모가족</Button>
+                                : <Family
+                                    onClick={this.props.onChange} />
+                        }
+                    </div>
                 </div>
             </React.Fragment>
         )

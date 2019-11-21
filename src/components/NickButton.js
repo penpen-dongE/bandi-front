@@ -27,9 +27,6 @@ export default function ContainedButtons({
 }) {
   const classes = useStyles();
 
-  console.log(onChange);
-  console.log(onclick);
-
   return (
 
     <Router>
@@ -38,7 +35,6 @@ export default function ContainedButtons({
           buttonValues.map(v => (
             <Link to={`/${v}`} style={{ textDecoration: 'none' }}>
               <Button value={v} variant="contained"
-                onClick={onclick}
                 className={classes.button}>
                 {v}
               </Button>
