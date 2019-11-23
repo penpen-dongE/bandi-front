@@ -12,14 +12,16 @@ class App extends Component {
     super(props);
     this.state = {
       chatState: false,
+      user: '',
     };
     this._chatStateChange = this._chatStateChange.bind(this);
   }
 
-  _chatStateChange = (e) => {
-    //console.log(e.target.value);
+  _chatStateChange = (test) => {
+
     this.setState({
-      chatState: true
+      chatState: true,
+      user: test,
     })
   };
 
@@ -41,7 +43,7 @@ class App extends Component {
         </BrowserRouter>
       );
     } else {
-      console.log(this.props);
+      console.log(this.state);
       return (
 
         <div className="bandibot">

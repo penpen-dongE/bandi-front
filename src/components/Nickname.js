@@ -16,7 +16,6 @@ class Nickname extends Component {
 
         axios.post('/chat', {
             value: this.state.value,
-            chatstate: this.state.chatstate,
         }).then((response) => {
             console.log(response)
         }).catch((error) => {

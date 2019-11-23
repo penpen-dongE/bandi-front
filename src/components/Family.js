@@ -44,7 +44,9 @@ class Family extends Component {
                     </Row>
                     <main>
                         <Route path="/lifeandfamily/:family"
-                            component={() => <Chat onClick={this.props.onClick()} />} />
+                            component={() =>
+                                <Chat {...this.props}
+                                    onClick={this.props.onClick()} />} />
                     </main>
                 </React.Fragment>
             </Router>

@@ -3,6 +3,8 @@ import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import { Link, Route, BrowserRouter as Router } from "react-router-dom";
 import LifecycleAndFamily from './LifecycleAndFamily';
+
+
 // import App from '../App';
 
 
@@ -23,7 +25,7 @@ const useStyles = makeStyles(theme => ({
 const buttonValues = ['Zet', 'H', 'S', 'M']
 
 export default function ContainedButtons({
-  onclick, onChange
+  onclick, onChange,
 }) {
   const classes = useStyles();
 
@@ -42,8 +44,9 @@ export default function ContainedButtons({
           ))
         }
         {<main>
-          <Route path="/:lifeandfamily"
-            component={() => <LifecycleAndFamily onChange={onChange} />} />
+          <Route path={`/:lifeandfamily`}
+            component={(match) => <LifecycleAndFamily dvalue={match}
+              onChange={onChange} />} />
         </main>}
       </React.Fragment>
     </Router>
