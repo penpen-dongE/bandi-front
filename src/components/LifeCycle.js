@@ -8,14 +8,14 @@ import "./../styles/LifeCycle.css"
 class LifeCycle extends Component {
     render() {
 
-        console.log(this.props.test)
+        let userName = this.props.dvalue.match.params.lifeandfamily;
 
         const lifeValues = ['임신출산', '영유아', '청소년', '청년', '장년', '노인']
 
         const lifeList = lifeValues.map((life) => (
 
             <Col span={4}>
-                <Link to={`/:lifeandfamily/${life}`}>
+                <Link to={`/${userName}/${life}`}>
                     <button
 
                         id='button'>
@@ -34,7 +34,9 @@ class LifeCycle extends Component {
                     </Row>
                     <main>
                         <Route path="/:lifeandfamily/:life"
-                            component={(test) => <Chat {...this.props} onClick={this.props.onClick(test)} />} />
+                            component={() =>
+                                <Chat dvalue={this.props.dvalue}
+                                    onClick={this.props.onClick(userName)} />} />
                     </main>
 
                 </React.Fragment>

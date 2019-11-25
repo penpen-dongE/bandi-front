@@ -12,18 +12,25 @@ class App extends Component {
     super(props);
     this.state = {
       chatState: false,
-      user: '',
+      userName: '',
     };
     this._chatStateChange = this._chatStateChange.bind(this);
+    this._handOver = this._handOver.bind(this);
   }
 
-  _chatStateChange = (test) => {
+  _chatStateChange = (userName) => {
 
     this.setState({
       chatState: true,
-      user: test,
+      userName: userName,
     })
   };
+
+  _handOver = (userName) => {
+    this.setState({
+      userNameF: userName
+    })
+  }
 
   render() {
     let { chatState } = this.state;
@@ -43,7 +50,8 @@ class App extends Component {
         </BrowserRouter>
       );
     } else {
-      console.log(this.state);
+      // console.log(this.state);
+      // console.log(this.state.userName)
       return (
 
         <div className="bandibot">
@@ -52,7 +60,7 @@ class App extends Component {
               <Header />
             </div>
             <div className="chat">
-              <Chat />
+              <Chat value={this.state.userName} />
             </div>
           </React.Fragment>
         </div>

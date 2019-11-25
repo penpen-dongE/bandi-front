@@ -2,11 +2,9 @@
     height: 430px;
     padding: 10px;
     overflow: auto;
-    display: flex;
-    flex-direction: column;
 }
 
-.me, .bot, .ai { 
+.me, .bot, .ai{ 
     padding: 4px;
     margin: 10px;
     font-weight: bold;
@@ -21,11 +19,11 @@
     max-width: 300px;
 }
 
-.bot {
+.bot, .ai {
     background: #009688;
 }
 
-.bot:after, .bot:before {
+.bot:after, .bot:before, .ai:after, .ai:before{
 	right: 100%;
 	top: 50%;
 	border: solid transparent;
@@ -39,27 +37,10 @@
     border-right-color: #009688;
 }
 
-.ai {
-    background: #cddc39;
-}
-
-.ai:after, .ai:before {
-	right: 100%;
-	top: 50%;
-	border: solid transparent;
-	content: " ";
-	height: 0;
-	width: 0;
-	position: absolute;
-    pointer-events: none;
-    border-width: 5px;
-    margin-top: -3px;
-    border-right-color:#cddc39;
-}
-
 .me {
     background-color:#01579b ;  
-    margin-left: auto;
+    margin-left: 100px;
+    display: block;
 }
 
 .me:after, .me:before {
@@ -89,4 +70,15 @@
 .btn {
     margin-left: 10px;
     margin-right: 10px;
+    font-size: 15;  
+    border-top-left-radius: 0;
+        border-bottom-left-radius: 0;
+        white-space: nowrap;
+}
+
+#snackbar{
+    opacity: 1;
+    transform: translateX(-3%);
+    transition: opacity 225ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, transform 150ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+ 
 }

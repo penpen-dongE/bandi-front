@@ -17,13 +17,15 @@ class Family extends Component {
     }
 
     render() {
-        console.log(this.props);
+        // console.log(this.props);
+
+        let userName = this.props.dvalue.match.params.lifeandfamily;
 
         const familyValues = ['한부모가족', '조손가족', '청소년 한부모가족']
 
         const familyList = familyValues.map((fam) => (
             <Col span={4}>
-                <Link to={`/lifeandfamily/${fam}`}>
+                <Link to={`${userName}/${fam}`}>
 
                     <button
                         id='button'>
@@ -43,10 +45,10 @@ class Family extends Component {
                         {familyList}
                     </Row>
                     <main>
-                        <Route path="/lifeandfamily/:family"
+                        <Route path="/:lifeandfamily/:family"
                             component={() =>
-                                <Chat {...this.props}
-                                    onClick={this.props.onClick()} />} />
+                                <Chat dvalue={this.props.dvalue}
+                                    onClick={this.props.onClick(userName)} />} />
                     </main>
                 </React.Fragment>
             </Router>

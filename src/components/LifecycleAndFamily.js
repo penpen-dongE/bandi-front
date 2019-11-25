@@ -48,8 +48,10 @@ class LifecycleAndFamily extends Component {
     }
 
     render() {
-        console.log(this.props.dvalue.match.params.lifeandfamily);
-        const username = this.props.dvalue.match.params.lifeandfamily;
+        // console.log(this.props)
+
+        // console.log(this.props.dvalue.match.params.lifeandfamily);
+        // const username = this.props.dvalue.match.params.lifeandfamily;
 
         return (
 
@@ -61,7 +63,7 @@ class LifecycleAndFamily extends Component {
                             this.state.clicked
                                 ? this.state.appear && <Button title="생애주기" onClick={this._checkedButton}
                                     variant="outlined" color="primary" size="large">생애주기</Button>
-                                : <LifeCycle {...this.props} test={username}
+                                : <LifeCycle {...this.props}
                                     onClick={this.props.onChange} />
 
                         }

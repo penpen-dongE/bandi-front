@@ -8,7 +8,6 @@ import Snackbar from '@material-ui/core/Snackbar';
 import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@material-ui/icons/Close';
 
-
 class Chat extends Component {
 
     constructor(props) {
@@ -17,16 +16,27 @@ class Chat extends Component {
         this.state = {
             messages: [],
             chatText: '',
+            chatState: false,
             isUserAlreadyReceived: false,
-            user: '',
-            open: false
+            open: false,
+            userNameF: '',
         }
 
         this.textChanged = this.textChanged.bind(this)
         this.onClicked = this.onClicked.bind(this)
         this.setOpen = this.setOpen.bind(this)
         this.handleClose = this.handleClose.bind(this)
+        this.handleKeyPress = this.handleKeyPress.bind(this)
     }
+
+    //Enter 기능 관련 함수
+    handleKeyPress(e) {
+        if (e.charCode === 13) {
+            this.onClicked()
+        }
+    }
+
+    //예시질문 관련 함수
     setOpen() {
         this.setState({
             open: true
@@ -41,7 +51,7 @@ class Chat extends Component {
         });
     };
 
-
+    //Send 관련함수
     textChanged(e) {
         this.setState({
             chatText: e.target.value
@@ -56,6 +66,25 @@ class Chat extends Component {
                 text: chatText,
             }),
         }))
+        axios.post("http://localhost:5000/test", { chatText: this.state.chatText })
+            .then((response) => {
+                console.log(response.data)
+                let result = response.data.split(",")
+                this.setState(({ messages, chatText }) => (
+                    {
+                        messages: messages.concat(
+                            {
+                                from: 'ai',
+                                text: result[1].slice(2, -2) + ", " + result[3].slice(2, -2) + ", " + result[5].slice(2, -2)
+                            }
+                        )
+                    }
+                ))
+                console.log(result)
+            })
+            .catch((error) => {
+                console.error(error)
+            })
         axios.post("http://localhost:9000/chat", { chatText: this.state.chatText })
             .then((response) => {
                 this.setState(({ messages, chatText }) => (
@@ -69,47 +98,29 @@ class Chat extends Component {
                     }
                 ))
                 //console.log(this.state.messages[0].from)
+                //console.log(this.props)
             })
             .catch((error) => {
                 console.error(error)
             })
-        if (!this.state.isUserAlreadyReceived) {
-            axios.post("http://localhost:5000/test", { chatText: this.state.chatText })
-                .then((response) => {
-                    console.log(response)
 
-                    let result = response.data.split(',')
-                    this.setState(({ messages, chatText }) => (
-                        {
-                            messages: messages.concat(
-                                {
-                                    from: 'ai',
-                                    text: result[1].slice(2, -2)
-                                }
-                            )
-                        }
-                    ))
-                })
-                .catch((error) => {
-                    console.error(error)
-                })
-            // this.setState({
-            //     isUserAlreadyReceived: true
-            // })
-        }
-
-
+        //if (!this.state.isUserAlreadyReceived) {
+        //    axios
+        //    true로
+        //}
     }
 
+
     render() {
-        console.log(this.props.test);
-        console.log(this.props);
+        // console.log(this.props)
+        //let userName = this.props.dvalue.match.params.lifeandfamily;
+        let userNameF = this.props.value;
         return (
             <React.Fragment>
                 <div className='wrapper'>
-                    <div className='chatwindow'>
+                    <div className='chatwindow' >
                         <div className='bot'>
-                            {`${this.props.v} 님 안녕하세요. 반디봇입니다.`}
+                            {`${userNameF}님 안녕하세요. 반디봇입니다.`}
                         </div>
                         {
                             this.state.messages.map((message, index) => {
@@ -124,13 +135,9 @@ class Chat extends Component {
 
                     <div className='input'>
                         <div className='text'>
-                            <TextField label="질문을 적어주세요." value={this.state.chatText} onChange={this.textChanged}
-                                onKeyPress={e => {
-                                    console.log('check', e.key);
-                                    if (e.key === 'Enter') {
-                                        this.textChanged(e);
-                                    }
-                                }} />
+                            <TextField label="질문을 적어주세요." value={this.state.chatText}
+                                onChange={this.textChanged}
+                                onKeyPress={this.handleKeyPress} />
                         </div>
 
                         <div className='btn'>
@@ -139,19 +146,18 @@ class Chat extends Component {
                                 color="primary"
                                 aria-label="full-width contained primary button group"
                             >
-                                <Button onClick={this.onClicked} >
+                                <Button onClick={this.onClicked}>
                                     send</Button>
 
                                 <Button onClick={this.setOpen}>
                                     질문예시</Button>
-                                <Snackbar
-                                    class='snackbar'
+                                <Snackbar id="snackbar"
                                     anchorOrigin={{
                                         vertical: 'bottom',
                                         horizontal: 'left',
                                     }}
                                     open={this.state.open}
-                                    autoHideDuration={600000}
+                                    // autoHideDuration={6000}
                                     onClose={this.handleClose}
                                     ContentProps={{
                                         'aria-describedby': 'message-id',
@@ -183,3 +189,4 @@ class Chat extends Component {
 }
 
 export default Chat;
+
