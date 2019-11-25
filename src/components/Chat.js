@@ -77,14 +77,14 @@ class Chat extends Component {
             axios.post("http://localhost:5000/test", { chatText: this.state.chatText })
                 .then((response) => {
                     console.log(response)
+
                     let result = response.data.split(',')
-                    console.log(result)
                     this.setState(({ messages, chatText }) => (
                         {
                             messages: messages.concat(
                                 {
                                     from: 'ai',
-                                    text: result[1],
+                                    text: result[1].slice(2, -2)
                                 }
                             )
                         }
@@ -124,7 +124,13 @@ class Chat extends Component {
 
                     <div className='input'>
                         <div className='text'>
-                            <TextField label="질문을 적어주세요." value={this.state.chatText} onChange={this.textChanged} />
+                            <TextField label="질문을 적어주세요." value={this.state.chatText} onChange={this.textChanged}
+                                onKeyPress={e => {
+                                    console.log('check', e.key);
+                                    if (e.key === 'Enter') {
+                                        this.textChanged(e);
+                                    }
+                                }} />
                         </div>
 
                         <div className='btn'>
@@ -139,12 +145,13 @@ class Chat extends Component {
                                 <Button onClick={this.setOpen}>
                                     질문예시</Button>
                                 <Snackbar
+                                    class='snackbar'
                                     anchorOrigin={{
                                         vertical: 'bottom',
                                         horizontal: 'left',
                                     }}
                                     open={this.state.open}
-                                    autoHideDuration={6000}
+                                    autoHideDuration={600000}
                                     onClose={this.handleClose}
                                     ContentProps={{
                                         'aria-describedby': 'message-id',

@@ -3,6 +3,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import { Link, Route, BrowserRouter as Router } from "react-router-dom";
 import LifecycleAndFamily from './LifecycleAndFamily';
+import Profile1Img from '../assets/profile1.jpg';
 
 
 // import App from '../App';
@@ -38,6 +39,7 @@ export default function ContainedButtons({
             <Link to={`/${v}`} style={{ textDecoration: 'none' }}>
               <Button value={v} variant="contained"
                 className={classes.button}>
+                {/*<img src={Profile1Img} alt="bandibot" />*/}
                 {v}
               </Button>
             </Link>

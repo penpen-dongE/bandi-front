@@ -24,6 +24,7 @@ const Input = () => {
                     setchatText(e.target.value);
                 }}
                 onKeyPress={e => {
+                    console.log('check', e);
                     if (e.key === 'Enter') {
                         setchatText("");
                     }
