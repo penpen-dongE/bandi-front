@@ -27,7 +27,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const buttonValues = ['Z', 'H', 'S', 'M']
-const imgvalues = [ddImg1, ddImg2, ddImg3, ddImg4]
+// const imgvalues = [ddImg1, ddImg2, ddImg3, ddImg4]
 
 export default function ContainedButtons({
   onclick, onChange,
