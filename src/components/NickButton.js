@@ -3,7 +3,10 @@ import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import { Link, Route, BrowserRouter as Router } from "react-router-dom";
 import LifecycleAndFamily from './LifecycleAndFamily';
-import Profile1Img from '../assets/profile1.jpg';
+import ddImg1 from '../assets/ddd1.png';
+import ddImg2 from '../assets/ddd2.png';
+import ddImg3 from '../assets/ddd3.png';
+import ddImg4 from '../assets/ddd4.png';
 
 
 // import App from '../App';
@@ -23,7 +26,8 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const buttonValues = ['Zet', 'H', 'S', 'M']
+const buttonValues = ['Z', 'H', 'S', 'M']
+const imgvalues = [ddImg1, ddImg2, ddImg3, ddImg4]
 
 export default function ContainedButtons({
   onclick, onChange,
@@ -36,13 +40,30 @@ export default function ContainedButtons({
       <React.Fragment>
         {
           buttonValues.map(v => (
+
             <Link to={`/${v}`} style={{ textDecoration: 'none' }}>
               <Button value={v} variant="contained"
                 className={classes.button}>
-                {/*<img src={Profile1Img} alt="bandibot" />*/}
+                {
+                  (v === 'Z') &&
+                  <img src={ddImg3} alt="Zet" id="nickimg" />
+                }
+                {
+                  (v === 'H') &&
+                  <img src={ddImg1} alt="Zet" id="nickimg" />
+                }
+                {
+                  (v === 'S') &&
+                  <img src={ddImg2} alt="Zet" id="nickimg" />
+                }
+                {
+                  (v === 'M') &&
+                  <img src={ddImg4} alt="Zet" id="nickimg" />
+                }
                 {v}
               </Button>
             </Link>
+
           ))
         }
         {<main>

@@ -88,9 +88,10 @@ class Chat extends Component {
         axios.post("http://localhost:9000/chat", { chatText: this.state.chatText })
             .then((response) => {
                 console.log(response)
-                let result2 = response.data.split("합니다.")
+                let result2 = response.data.split(".")
                 console.log(result2)
                 //for 문으로 result2 결과 하나씩 출력하고 마지막 요소빼고 출력할 때 "합니다." 붙이기 
+
                 this.setState(({ messages, chatText }) => (
                     {
                         messages: messages.concat(
