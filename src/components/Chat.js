@@ -7,6 +7,12 @@ import ButtonGroup from '@material-ui/core/ButtonGroup';
 import Snackbar from '@material-ui/core/Snackbar';
 import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@material-ui/icons/Close';
+import MoreInfo from './MoreInfo';
+import ddImg1 from '../assets/ddd1.png';
+import ddImg2 from '../assets/ddd2.png';
+import ddImg3 from '../assets/ddd3.png';
+import ddImg4 from '../assets/ddd4.png';
+import bandi from '../assets/bandi.png';
 
 class Chat extends Component {
 
@@ -27,6 +33,7 @@ class Chat extends Component {
         this.setOpen = this.setOpen.bind(this)
         this.handleClose = this.handleClose.bind(this)
         this.handleKeyPress = this.handleKeyPress.bind(this)
+
     }
 
     //Enter 기능 관련 함수
@@ -35,7 +42,16 @@ class Chat extends Component {
             this.onClicked()
         }
     }
-
+    // auto scroll to bottom    
+    componentDidMount() {
+        this.scrollToBottom();
+    }
+    componentDidUpdate() {
+        this.scrollToBottom();
+    }
+    scrollToBottom() {
+        this.el.scrollIntoView({ behavior: 'smooth' });
+    }
     //예시질문 관련 함수
     setOpen() {
         this.setState({
@@ -66,11 +82,33 @@ class Chat extends Component {
                 text: chatText,
             }),
         }))
+        axios.post("http://localhost:9000/chat", { chatText: this.state.chatText })
+            .then((response) => {
+                console.log(response)
+                let result2 = response.data.split(".")
+                console.log(result2)
+                //for 문으로 result2 결과 하나씩 출력하고 마지막 요소빼고 출력할 때 "합니다." 붙이기 
+
+                this.setState(({ messages }) => (
+                    {
+                        messages: messages.concat(
+                            {
+                                from: 'bot',
+                                text: response.data,
+                            }
+                        )
+                    }
+                ))
+            })
+            .catch((error) => {
+                console.error(error)
+            })
         axios.post("http://localhost:5000/test", { chatText: this.state.chatText })
             .then((response) => {
                 console.log(response.data)
+
                 let result = response.data.split(",")
-                this.setState(({ messages, chatText }) => (
+                this.setState(({ messages }) => (
                     {
                         messages: messages.concat(
                             {
@@ -81,58 +119,66 @@ class Chat extends Component {
                     }
                 ))
                 console.log(result)
-            })
-            .catch((error) => {
-                console.error(error)
-            })
-        axios.post("http://localhost:9000/chat", { chatText: this.state.chatText })
-            .then((response) => {
-                console.log(response)
-                let result2 = response.data.split(".")
-                console.log(result2)
-                //for 문으로 result2 결과 하나씩 출력하고 마지막 요소빼고 출력할 때 "합니다." 붙이기 
 
-                this.setState(({ messages, chatText }) => (
-                    {
-                        messages: messages.concat(
-                            {
-                                from: 'bot',
-                                text: response.data,
-                            }
-                        )
-                    }
-                ))
-                //console.log(this.state.messages[0].from)
-                //console.log(this.props)
+                this.moreInfo(result);
             })
             .catch((error) => {
                 console.error(error)
             })
-        //if (!this.state.isUserAlreadyReceived) {
-        //    axios
-        //    true로
-        //}
     }
     render() {
         // console.log(this.props)
         //let userName = this.props.dvalue.match.params.lifeandfamily;
         let userNameF = this.props.value;
+
         return (
-            <React.Fragment>
+            <React.Fragment >
                 <div className='wrapper'>
                     <div className='chatwindow' >
-                        <div className='bot'>
-                            {`${userNameF}님 안녕하세요. 반디봇입니다.`}
-                        </div>
+                        <span>
+                            <div className='img1st'>
+                                <img src={bandi} alt="bandi" />
+                            </div>
+                            <div className='bot'>
+                                {`${userNameF}님 안녕하세요. 반디봇입니다.`}
+                            </div>
+                        </span>
                         {
                             this.state.messages.map((message, index) => {
                                 return (
-                                    <div className={message.from} key={index}>
-                                        {message.text}
-                                    </div>
+                                    <React.Fragment>
+                                        <div className='dialog'>
+                                            <span>
+                                                <div className={message.from} key={index}>
+                                                    {message.text}
+                                                </div>
+                                                <div className='img1st'>
+                                                    {
+                                                        (message.from === 'bot') &&
+                                                        <img src={bandi} alt="bandi" id="botimg" />
+                                                    }
+                                                </div>
+                                                <div className='img2nd'>
+                                                    {
+                                                        (message.from === 'me') &&
+                                                        <img src={ddImg3} alt="Zet" id="nickimg" />
+                                                    }
+                                                </div>
+                                            </span>
+                                        </div>
+                                        <div>
+                                            {
+                                                (message.from === 'ai') &&
+                                                <MoreInfo  {...this.state} />
+                                            }
+                                        </div>
+
+                                    </React.Fragment>
+
                                 )
                             })
                         }
+                        <div ref={el => { this.el = el; }} />
                     </div>
 
                     <div className='input'>
@@ -185,7 +231,7 @@ class Chat extends Component {
                         </div>
                     </div>
                 </div>
-            </React.Fragment>
+            </React.Fragment >
         )
     }
 }

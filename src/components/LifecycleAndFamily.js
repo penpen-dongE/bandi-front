@@ -21,38 +21,9 @@ class LifecycleAndFamily extends Component {
     }
 
     _checkedButton = () => this.setState({ clicked: false, })
-
     selectAppear = () => this.setState({ appear: false, });
 
-    btnClickedLife = (e) => {
-
-        axios.post('/chat', {
-            lifeValue: this.state.lifeValue,
-        }).then((response) => {
-            console.log(response)
-        }).catch((error) => {
-            console.log(error)
-        })
-    }
-
-    btnClickedFamily = (e) => {
-
-        axios.post('/chat', {
-            familyValue: this.state.familyValue,
-
-        }).then((response) => {
-            console.log(response)
-        }).catch((error) => {
-            console.log(error)
-        })
-    }
-
     render() {
-        // console.log(this.props)
-
-        // console.log(this.props.dvalue.match.params.lifeandfamily);
-        // const username = this.props.dvalue.match.params.lifeandfamily;
-
         return (
 
             <React.Fragment>
