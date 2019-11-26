@@ -56,7 +56,6 @@ class Chat extends Component {
     setOpen() {
         this.setState({
             open: true
-
         })
         console.log(this.open)
     };
@@ -118,9 +117,6 @@ class Chat extends Component {
                         )
                     }
                 ))
-                console.log(result)
-
-                this.moreInfo(result);
             })
             .catch((error) => {
                 console.error(error)
@@ -149,9 +145,18 @@ class Chat extends Component {
                                     <React.Fragment>
                                         <div className='dialog'>
                                             <span>
-                                                <div className={message.from} key={index}>
-                                                    {message.text}
-                                                </div>
+                                                {
+                                                    (message.from === 'bot') &&
+                                                    <div className={message.from} key={index}>
+                                                        {message.text}
+                                                    </div>
+                                                }
+                                                {
+                                                    (message.from === 'me') &&
+                                                    <div className={message.from} key={index}>
+                                                        {message.text}
+                                                    </div>
+                                                }
                                                 <div className='img1st'>
                                                     {
                                                         (message.from === 'bot') &&

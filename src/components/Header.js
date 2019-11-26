@@ -12,11 +12,23 @@ import MuiDialogContent from '@material-ui/core/DialogContent';
 import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@material-ui/icons/Close';
 
+import { blue, red } from '@material-ui/core/colors';
+import SvgIcon from '@material-ui/core/SvgIcon';
+import { Link } from 'react-router-dom';
+import { BrowserRouter as Route, Switch } from "react-router-dom";
+
+import Home from './Home';
+
+
 //app bar css
 const useStyles = makeStyles(theme => ({
   root: {
     flexGrow: 1,
-
+  },
+  iconHover: {
+    '&:hover': {
+      color: red[800],
+    },
   },
   title: {
     flexGrow: 1,
@@ -75,11 +87,26 @@ export default function Header() {
     setOpen(false);
   };
 
+  const HomeIcon = function HomeIcon(props) {
+    return (
+      <SvgIcon {...props}>
+        <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z" />
+      </SvgIcon>
+    );
+  }
+
+
+
   return (
     <header className={classes.root}>
 
       <AppBar position="static">
         <Toolbar>
+
+          <Link to="/home">
+            <IconButton className={classes.iconHover} aria-label="Home" color="error" style={{ fontSize: 50 }} />
+            <HomeIcon />
+          </Link>
           <Typography variant="h6" className={classes.title}>
             <h3>BandiBot</h3>
           </Typography>
@@ -96,6 +123,12 @@ export default function Header() {
         </DialogContent>
       </Dialog>
 
+      <Switch>
+        <Route exact={true} path="/home" component={Home} />
+      </Switch>
     </header>
   );
 }
+
+
+  //1126

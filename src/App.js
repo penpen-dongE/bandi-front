@@ -50,10 +50,7 @@ class App extends Component {
         </BrowserRouter>
       );
     } else {
-      // console.log(this.state);
-      // console.log(this.state.userName)
       return (
-
         <div className="bandibot">
           <React.Fragment>
             <div className="header">
@@ -64,7 +61,6 @@ class App extends Component {
             </div>
           </React.Fragment>
         </div>
-
       );
     }
 
