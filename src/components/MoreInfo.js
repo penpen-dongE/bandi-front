@@ -20,19 +20,19 @@ export default class MoreInfo extends Component {
         this.setState({
             token: true,
         })
-        //console.log(result)
+        for (let i = 0; i < this.props.messages.length; i++) {
+            if (this.props.messages[i].from === 'ai') return this.thisIs = this.props.messages[i].text
+        }
     }
 
     render() {
         console.log(this.props);
+        console.log(this.thisIs);
+
         let { token } = this.state;
-
-        let data = this.props.messages;
-
+        const data = this.props.messages;
         const moreInfo = () => {
-
             for (let i = 0; i < data.length; i++) {
-                console.log(data[i].from)
                 if (data[i].from === 'ai') {
                     let MoreInfoList = data[i].text.split(",")
                     console.log(MoreInfoList)
@@ -47,7 +47,14 @@ export default class MoreInfo extends Component {
         //          </button>
         //      </div>
         //  ));
+        const datalist = this.thisIs.map((list) => (
+            <div>
 
+                {list}
+
+            </div>
+        ));
+        console.log(datalist)
         if (!token) {
             return (
                 <div className='ai'>
@@ -65,8 +72,8 @@ export default class MoreInfo extends Component {
                         <button title="moreinfolist" variant="outlined"
                             color="primary" size="large"
                         >
-                            정책 3개 보이기
-                            {/*datalist*/}
+                            {/*정책 3개 보이기*/}
+                            {datalist}
                         </button>
 
                     </div>
