@@ -21,40 +21,24 @@ export default class MoreInfo extends Component {
             token: true,
         })
         for (let i = 0; i < this.props.messages.length; i++) {
-            if (this.props.messages[i].from === 'ai') return this.thisIs = this.props.messages[i].text
+            if (this.props.messages[i].from === 'ai') return this.setState({ thisIs: this.props.messages[i].text })
         }
     }
 
     render() {
         console.log(this.props);
-        console.log(this.thisIs);
-
+        console.log(this.state.thisIs);
         let { token } = this.state;
-        const data = this.props.messages;
-        const moreInfo = () => {
-            for (let i = 0; i < data.length; i++) {
-                if (data[i].from === 'ai') {
-                    let MoreInfoList = data[i].text.split(",")
-                    console.log(MoreInfoList)
-                }
-            }
-        }
-        //에러에러에러에러
-        //  const datalist = moreInfo.MoreInfoList.map((list) => (
-        //      <div>
-        //          <button id='button'>
-        //              {list}
-        //          </button>
-        //      </div>
-        //  ));
-        const datalist = this.thisIs.map((list) => (
+        const data = this.state.thisIs;
+
+        //TypeError: data.map is not a function
+        data.map(list => (
             <div>
-
                 {list}
-
             </div>
-        ));
-        console.log(datalist)
+        ))
+
+
         if (!token) {
             return (
                 <div className='ai'>
@@ -72,10 +56,10 @@ export default class MoreInfo extends Component {
                         <button title="moreinfolist" variant="outlined"
                             color="primary" size="large"
                         >
+                            {data}
                             {/*정책 3개 보이기*/}
-                            {datalist}
+                            {/*datalist*/}
                         </button>
-
                     </div>
                 </React.Fragment>
             );
