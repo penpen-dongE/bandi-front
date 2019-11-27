@@ -6,19 +6,19 @@
     flex-direction: column;
 }
 
-.img1st {
+.img1st, .img2nd {
     display: inline-block;
-    vertical-align: middle;    
+    vertical-align: middle;
 }
 
-.img2nd {
-    display: inline-block;
-    vertical-align: middle;    
-}
-
-.dialog{
+.dialog1{
     display: inline-flex;
-    flex-direction: row-reverse
+    align-items: center;
+}
+
+.dialog2{
+    display: inline-flex;
+    flex-direction: row-reverse;
 }
 
 .me, .bot, .ai { 

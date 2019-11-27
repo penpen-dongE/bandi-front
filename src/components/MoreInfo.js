@@ -1,16 +1,13 @@
 import React, { Component } from 'react';
 import Button from '@material-ui/core/Button';
 import "./../styles/Chat.css";
-// import MoreInfo2 from './MoreInfo2';
 
 export default class MoreInfo extends Component {
     constructor(props) {
         super(props)
         this.state = {
             token: false,
-            data: [],
             thisIs: [],
-            moreInfoList: [],
         }
         this._clickButton = this._clickButton.bind(this);
 
@@ -24,19 +21,20 @@ export default class MoreInfo extends Component {
             if (this.props.messages[i].from === 'ai') return this.setState({ thisIs: this.props.messages[i].text })
         }
     }
+    _moreClicked() {
+        this.setState({
+
+        })
+    }
 
     render() {
-        console.log(this.props);
-        console.log(this.state.thisIs);
         let { token } = this.state;
-        const data = this.state.thisIs;
 
-        //TypeError: data.map is not a function
-        data.map(list => (
-            <div>
-                {list}
-            </div>
-        ))
+        console.log(this.state.thisIs)
+
+        const a = this.state.thisIs[0];
+        const b = this.state.thisIs[1];
+        const c = this.state.thisIs[2];
 
 
         if (!token) {
@@ -53,13 +51,19 @@ export default class MoreInfo extends Component {
 
                 <React.Fragment>
                     <div className='btn'>
-                        <button title="moreinfolist" variant="outlined"
+                        <Button title="moreinfolist" variant="outlined"
                             color="primary" size="large"
-                        >
-                            {data}
-                            {/*정책 3개 보이기*/}
-                            {/*datalist*/}
-                        </button>
+                            onClick={}>
+                            {a}
+                        </Button>
+                        <Button title="moreinfolist" variant="outlined"
+                            color="primary" size="large">
+                            {b}
+                        </Button>
+                        <Button title="moreinfolist" variant="outlined"
+                            color="primary" size="large">
+                            {c}
+                        </Button>
                     </div>
                 </React.Fragment>
             );

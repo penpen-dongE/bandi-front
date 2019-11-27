@@ -12,7 +12,7 @@ import ddImg1 from '../assets/ddd1.png';
 import ddImg2 from '../assets/ddd2.png';
 import ddImg3 from '../assets/ddd3.png';
 import ddImg4 from '../assets/ddd4.png';
-import bandi from '../assets/bandi.png';
+import bandi from '../assets/bandii.png';
 
 class Chat extends Component {
 
@@ -87,17 +87,31 @@ class Chat extends Component {
                 let result2 = response.data.split(".")
                 console.log(result2)
                 //for 문으로 result2 결과 하나씩 출력하고 마지막 요소빼고 출력할 때 "합니다." 붙이기 
-
-                this.setState(({ messages }) => (
-                    {
-                        messages: messages.concat(
+                if (result2.length > 2) {
+                    for (let i = 0; i < result2.length; i++) {
+                        this.setState(({ messages }) => (
                             {
-                                from: 'bot',
-                                text: response.data,
+                                messages: messages.concat(
+                                    {
+                                        from: 'bot',
+                                        text: result2[i],
+                                    }
+                                )
                             }
-                        )
+                        ))
                     }
-                ))
+                } else {
+                    this.setState(({ messages }) => (
+                        {
+                            messages: messages.concat(
+                                {
+                                    from: 'bot',
+                                    text: response.data,
+                                }
+                            )
+                        }
+                    ))
+                }
             })
             .catch((error) => {
                 console.error(error)
@@ -107,12 +121,13 @@ class Chat extends Component {
                 console.log(response.data)
 
                 let result = response.data.split(",")
+
                 this.setState(({ messages }) => (
                     {
                         messages: messages.concat(
                             {
                                 from: 'ai',
-                                text: result[1].slice(2, -2) + ", " + result[3].slice(2, -2) + ", " + result[5].slice(2, -2)
+                                text: [result[1].slice(2, -2), result[3].slice(2, -2), result[5].slice(2, -2)]
                             }
                         )
                     }
@@ -143,26 +158,28 @@ class Chat extends Component {
                             this.state.messages.map((message, index) => {
                                 return (
                                     <React.Fragment>
-                                        <div className='dialog'>
-                                            <span>
+                                        <span className='dialog1'>
+                                            <div className='img1st'>
                                                 {
                                                     (message.from === 'bot') &&
-                                                    <div className={message.from} key={index}>
-                                                        {message.text}
-                                                    </div>
+                                                    <img src={bandi} alt="bandi" id="botimg" />
                                                 }
+                                            </div>
+                                            {
+                                                (message.from === 'bot') &&
+                                                <div className={message.from} key={index}>
+                                                    {message.text}
+                                                </div>
+                                            }
+                                        </span>
+                                        <div className='dialog2'>
+                                            <span >
                                                 {
                                                     (message.from === 'me') &&
                                                     <div className={message.from} key={index}>
                                                         {message.text}
                                                     </div>
                                                 }
-                                                <div className='img1st'>
-                                                    {
-                                                        (message.from === 'bot') &&
-                                                        <img src={bandi} alt="bandi" id="botimg" />
-                                                    }
-                                                </div>
                                                 <div className='img2nd'>
                                                     {
                                                         (message.from === 'me') &&

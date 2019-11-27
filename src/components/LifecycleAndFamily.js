@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import Family from './Family';
 import LifeCycle from './LifeCycle';
-import axios from 'axios';
 import './../styles/LifecycleAndFamily.css';
 import Button from '@material-ui/core/Button';
 
