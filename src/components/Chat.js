@@ -12,7 +12,7 @@ import ddImg1 from '../assets/ddd1.png';
 import ddImg2 from '../assets/ddd2.png';
 import ddImg3 from '../assets/ddd3.png';
 import ddImg4 from '../assets/ddd4.png';
-import bandi from '../assets/bandii.png';
+import bandi from '../assets/bandi_imo.png';
 
 class Chat extends Component {
 
@@ -151,7 +151,7 @@ class Chat extends Component {
                                 <img src={bandi} alt="bandi" />
                             </div>
                             <div className='bot'>
-                                {`${userNameF}님 안녕하세요. 반디봇입니다.`}
+                                {`${userNameF}님 안녕하세요.`}
                             </div>
                         </span>
                         {
@@ -187,8 +187,7 @@ class Chat extends Component {
                                                     }
                                                 </div>
                                             </span>
-                                        </div>
-                                        <div>
+
                                             {
                                                 (message.from === 'ai') &&
                                                 <MoreInfo  {...this.state} />

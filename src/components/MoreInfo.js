@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import axios from 'axios';
 import Button from '@material-ui/core/Button';
 import "./../styles/Chat.css";
 
@@ -8,12 +9,14 @@ export default class MoreInfo extends Component {
         this.state = {
             token: false,
             thisIs: [],
+            chatText: '',
+            messages: []
         }
         this._clickButton = this._clickButton.bind(this);
-
+        this._moreClicked = this._moreClicked.bind(this);
     }
-    _clickButton() {
 
+    _clickButton() {
         this.setState({
             token: true,
         })
@@ -21,21 +24,43 @@ export default class MoreInfo extends Component {
             if (this.props.messages[i].from === 'ai') return this.setState({ thisIs: this.props.messages[i].text })
         }
     }
-    _moreClicked() {
-        this.setState({
 
+    _moreClicked(m) {
+        this.setState ({
+            chatText: m
         })
+        console.log(this.state.chatText)
+        axios.post("http://localhost:9000/chat", { chatText: this.state.chatText })
+            .then((response) => {
+                console.log(response.data)
+
+                let result = response.data.split(".")
+                this.setState(({ messages }) => (
+                    {
+                        messages: messages.concat(
+                            {
+                                from: 'ai',
+                                text: result
+                            }
+                        )
+                    }
+                ))
+            })
+            .catch((error) => {
+                console.error(error)
+            })
     }
 
     render() {
         let { token } = this.state;
 
-        console.log(this.state.thisIs)
+        //console.log(this.state.thisIs)
 
-        const a = this.state.thisIs[0];
-        const b = this.state.thisIs[1];
-        const c = this.state.thisIs[2];
+        let a = this.state.thisIs[0];
+        let b = this.state.thisIs[1];
+        let c = this.state.thisIs[2];
 
+        const moreButtons = [a, b, c];
 
         if (!token) {
             return (
@@ -51,19 +76,15 @@ export default class MoreInfo extends Component {
 
                 <React.Fragment>
                     <div className='btn'>
-                        <Button title="moreinfolist" variant="outlined"
-                            color="primary" size="large"
-                            onClick={}>
-                            {a}
-                        </Button>
-                        <Button title="moreinfolist" variant="outlined"
-                            color="primary" size="large">
-                            {b}
-                        </Button>
-                        <Button title="moreinfolist" variant="outlined"
-                            color="primary" size="large">
-                            {c}
-                        </Button>
+                        {
+                            moreButtons.map(m => (
+                                <Button title="moreinfolist" variant="outlined"
+                                    color="primary" size="large" value={m}
+                                    onClick={() => this._moreClicked(m)}>
+                                    {m}
+                                </Button>
+                            ))
+                        }
                     </div>
                 </React.Fragment>
             );
