@@ -1,8 +1,9 @@
 .main {
-    background-color: white;
+    background-image: url('../assets/mainprofile.png');
+    background-position: 50% 50%;
     height: 86%;
-
 }
+
 .bandi {
         position: absolute;
         top: 150px;
@@ -16,12 +17,9 @@
         height: 40vmin;
         transform: translateX(60px);
 }
-
+    
 .btn-home {
-    border: 1px solid #3f51b5;
-    background-color: rgba(63, 81, 181, 0.08);
-    transform: translateX(100%);
+    transform: translateX(110%);
     position: relative;
-    transform: translateX(100%);
-    top: 80%;
+    top: 88%;
 }

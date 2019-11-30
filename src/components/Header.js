@@ -12,13 +12,9 @@ import MuiDialogContent from '@material-ui/core/DialogContent';
 import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@material-ui/icons/Close';
 
-import { blue, red } from '@material-ui/core/colors';
+import { grey } from '@material-ui/core/colors';
 import SvgIcon from '@material-ui/core/SvgIcon';
-import { Link } from 'react-router-dom';
-import { BrowserRouter, Route, Switch } from "react-router-dom";
-//import { Link, Route, BrowserRouter as Router } from "react-router-dom";
-
-import Home from './Home';
+import { Link, useHistory } from 'react-router-dom';
 
 
 //app bar css
@@ -28,16 +24,20 @@ const useStyles = makeStyles(theme => ({
   },
   iconHover: {
     '&:hover': {
-      color: red[800],
+      color: grey[100],
     },
   },
   title: {
     flexGrow: 1,
-    marginRight: theme.spacing(-7),
+    marginRight: theme.spacing(-1),
 
   },
   button: {
     background: '#f9fbe7'
+  },
+
+  btnColor: {
+    color: theme.palette.grey[100],
   }
 }));
 
@@ -51,7 +51,7 @@ const styles = theme => ({
     position: 'absolute',
     right: theme.spacing(1),
     top: theme.spacing(1),
-    color: theme.palette.grey[500],
+    color: theme.palette.grey[100],
   },
 });
 
@@ -79,6 +79,7 @@ const DialogContent = withStyles(theme => ({
 
 export default function Header() {
   const classes = useStyles();
+  const history = useHistory();
 
   const [open, setOpen] = React.useState(false);
   const handleClickOpen = () => {
@@ -104,36 +105,29 @@ export default function Header() {
       <AppBar position="static">
         <Toolbar>
 
-
-          <Link to="/home">
-            <IconButton className={classes.iconHover} aria-label="Home" color="error" style={{ fontSize: 50 }} />
-            <HomeIcon />
-          </Link>
-
-
+          <div onClick={() => { history.push('/home') }}>
+            <IconButton className={classes.btnColor} aria-label="Home" >
+              <HomeIcon fontSize="large" />
+            </IconButton>
+          </div>
           <Typography variant="h6" className={classes.title}>
             <h3>BandiBot</h3>
           </Typography>
           <Button className={classes.button} onClick={handleClickOpen}>사용설명서</Button>
-
         </Toolbar>
-      </AppBar>
+      </AppBar >
 
       <Dialog onClose={handleClose} aria-labelledby="customized-dialog-title" open={open}>
         <DialogTitle id="customized-dialog-title" onClose={handleClose}>
           반디봇 사용설명서
         </DialogTitle>
         <DialogContent dividers>
-          닉네임을 선택해주시고 해당되는 생애주기 혹은 한부모가족 형태를 선택하시면 반디봇과 대화하실 수 있습니다. (SEND옆에 버튼을 클릭하시면 질문예시를 확인하실 수 있어요. ^^)
+          닉네임을 선택해주시고 해당되는 생애주기 혹은 한부모가족 형태를 선택하시면 반디봇과 대화하실 수 있습니다.
         </DialogContent>
       </Dialog>
-
-      <Switch>
-        <Route exact={true} path="/home" component={Home} />
-      </Switch>
-    </header>
+    </header >
   );
 }
 
 
-  //1128 
+  //1128

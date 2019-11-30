@@ -79,6 +79,7 @@ class Chat extends Component {
     };
 
     onClicked() {
+        const chatText = this.state.chatText
         this.setState(({ messages, chatText }) => ({
             chatText: '',
             messages: messages.concat({
@@ -86,7 +87,7 @@ class Chat extends Component {
                 text: chatText,
             }),
         }))
-        axios.post("http://13.125.247.24:9000/chat", { chatText: this.state.chatText })
+        axios.post("http://13.125.247.24:9000/chat", { chatText: chatText })
             .then((response) => {
                 console.log(response)
                 let result2 = response.data.split(".")
@@ -119,33 +120,30 @@ class Chat extends Component {
             .catch((error) => {
                 console.error(error)
             })
-        axios.post("http://13.125.247.24:5000/test", { chatText: this.state.chatText })
-            .then((response) => {
-                console.log(response.data)
-
-                let result = response.data.split(",")
-
-                this.setState(({ messages }) => (
-                    {
-                        messages: messages.concat(
-                            {
-                                from: 'ai',
-                                text: [result[1].slice(2, -2), result[3].slice(2, -2), result[5].slice(2, -2)]
-                            }
-                        )
-                    }
-                ))
-            })
-            .catch((error) => {
-                console.error(error)
-            })
-        // this.setState({
-        //     messages: [],
-        //  })
         setTimeout(() => {
-            console.log('refresh')
-
+            axios.post("http://13.125.247.24:5000/test", { chatText: chatText })
+                .then((response) => {
+                    console.log(response.data)
+                    let result = response.data.split(",")
+                    if (result[1] === undefined) {
+                        return;
+                    }
+                    this.setState(({ messages }) => (
+                        {
+                            messages: messages.concat(
+                                {
+                                    from: 'ai',
+                                    text: [result[1].slice(2, -2), result[3].slice(2, -2), result[5].slice(2, -2)]
+                                }
+                            )
+                        }
+                    ))
+                })
+                .catch((error) => {
+                    console.error(error)
+                })
         }, 2000)
+        console.log(this.state)
     }
 
     render() {
@@ -199,6 +197,7 @@ class Chat extends Component {
                                             {
                                                 (message.from === 'ai') &&
                                                 <MoreInfo {...this.state} />
+                                                // 태현멘토님이 고치라고 한
                                             }
                                         </div>
 

@@ -12,7 +12,7 @@ export default class MoreInfo extends Component {
             token: false,
             thisIs: [],
             chatText: '',
-            messages: []
+            messages: [],
         }
         this._clickButton = this._clickButton.bind(this);
         this._moreClicked = this._moreClicked.bind(this);
@@ -25,8 +25,11 @@ export default class MoreInfo extends Component {
             thisIs: [],
 
         })
-        for (let i = 0; i < this.props.messages.length; i++) {
-            if (this.props.messages[i].from === 'ai') return this.setState({ thisIs: this.props.messages[i].text })
+        for (let i = this.props.messages.length - 1; i >= 0; i--) {
+            if (this.props.messages[i].from === 'ai') {
+                console.log(this.props.messages[i].text)
+                return this.setState({ thisIs: this.props.messages[i].text })
+            }
         }
 
     }

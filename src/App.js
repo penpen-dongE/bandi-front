@@ -36,18 +36,16 @@ class App extends Component {
     let { chatState } = this.state;
     if (!chatState) {
       return (
-        <BrowserRouter>
-          <div className="bandibot" >
-            <React.Fragment>
-              <div className="header">
-                <Header />
-              </div>
-              <div className="nickname">
-                <Nickname onChange={this._chatStateChange} />
-              </div>
-            </React.Fragment>
-          </div>
-        </BrowserRouter>
+        <div className="bandibot" >
+          <React.Fragment>
+            <div className="header">
+              <Header />
+            </div>
+            <div className="nickname">
+              <Nickname onChange={this._chatStateChange} />
+            </div>
+          </React.Fragment>
+        </div>
       );
     } else {
       return (
