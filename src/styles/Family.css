@@ -18,4 +18,5 @@
     font-family: 'SeoulNamsan';  
     border: 1.5px solid ;
     border-radius: 10px;
+    word-break: keep-all;
 }

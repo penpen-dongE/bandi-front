@@ -8,10 +8,10 @@ import Snackbar from '@material-ui/core/Snackbar';
 import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@material-ui/icons/Close';
 import MoreInfo from './MoreInfo';
-import ddImg1 from '../assets/ddd1.png';
-import ddImg2 from '../assets/ddd2.png';
+//import ddImg1 from '../assets/ddd1.png';
+//import ddImg2 from '../assets/ddd2.png';
 import ddImg3 from '../assets/ddd3.png';
-import ddImg4 from '../assets/ddd4.png';
+//import ddImg4 from '../assets/ddd4.png';
 import bandi from '../assets/bandi_imo.png';
 
 class Chat extends Component {
@@ -28,14 +28,18 @@ class Chat extends Component {
             userNameF: '',
         }
 
-        this.textChanged = this.textChanged.bind(this)
-        this.onClicked = this.onClicked.bind(this)
-        this.setOpen = this.setOpen.bind(this)
-        this.handleClose = this.handleClose.bind(this)
-        this.handleKeyPress = this.handleKeyPress.bind(this)
-
+        this.textChanged = this.textChanged.bind(this);
+        this.onClicked = this.onClicked.bind(this);
+        this.setOpen = this.setOpen.bind(this);
+        this.handleClose = this.handleClose.bind(this);
+        this.handleKeyPress = this.handleKeyPress.bind(this);
+        this.refresh = this.refresh.bind(this);
     }
-
+    refresh() {
+        this.setState({
+            messages: [],
+        })
+    }
     //Enter 기능 관련 함수
     handleKeyPress(e) {
         if (e.charCode === 13) {
@@ -61,6 +65,7 @@ class Chat extends Component {
     };
 
     handleClose() {
+
         this.setState({
             open: false
         });
@@ -81,12 +86,10 @@ class Chat extends Component {
                 text: chatText,
             }),
         }))
-        axios.post("http://localhost:9000/chat", { chatText: this.state.chatText })
+        axios.post("http://13.125.247.24:9000/chat", { chatText: this.state.chatText })
             .then((response) => {
                 console.log(response)
                 let result2 = response.data.split(".")
-                console.log(result2)
-                //for 문으로 result2 결과 하나씩 출력하고 마지막 요소빼고 출력할 때 "합니다." 붙이기 
                 if (result2.length > 2) {
                     for (let i = 0; i < result2.length; i++) {
                         this.setState(({ messages }) => (
@@ -116,7 +119,7 @@ class Chat extends Component {
             .catch((error) => {
                 console.error(error)
             })
-        axios.post("http://localhost:5000/test", { chatText: this.state.chatText })
+        axios.post("http://13.125.247.24:5000/test", { chatText: this.state.chatText })
             .then((response) => {
                 console.log(response.data)
 
@@ -136,12 +139,17 @@ class Chat extends Component {
             .catch((error) => {
                 console.error(error)
             })
-    }
-    render() {
-        // console.log(this.props)
-        //let userName = this.props.dvalue.match.params.lifeandfamily;
-        let userNameF = this.props.value;
+        // this.setState({
+        //     messages: [],
+        //  })
+        setTimeout(() => {
+            console.log('refresh')
 
+        }, 2000)
+    }
+
+    render() {
+        let userNameF = this.props.value;
         return (
             <React.Fragment >
                 <div className='wrapper'>
@@ -190,7 +198,7 @@ class Chat extends Component {
 
                                             {
                                                 (message.from === 'ai') &&
-                                                <MoreInfo  {...this.state} />
+                                                <MoreInfo {...this.state} />
                                             }
                                         </div>
 
@@ -247,7 +255,6 @@ class Chat extends Component {
                                         </IconButton>,
                                     ]}
                                 />
-
                             </ButtonGroup>
                         </div>
                     </div>

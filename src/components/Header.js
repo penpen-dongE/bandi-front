@@ -15,7 +15,8 @@ import CloseIcon from '@material-ui/icons/Close';
 import { blue, red } from '@material-ui/core/colors';
 import SvgIcon from '@material-ui/core/SvgIcon';
 import { Link } from 'react-router-dom';
-import { BrowserRouter as Route, Switch } from "react-router-dom";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
+//import { Link, Route, BrowserRouter as Router } from "react-router-dom";
 
 import Home from './Home';
 
@@ -103,14 +104,18 @@ export default function Header() {
       <AppBar position="static">
         <Toolbar>
 
+
           <Link to="/home">
             <IconButton className={classes.iconHover} aria-label="Home" color="error" style={{ fontSize: 50 }} />
             <HomeIcon />
           </Link>
+
+
           <Typography variant="h6" className={classes.title}>
             <h3>BandiBot</h3>
           </Typography>
           <Button className={classes.button} onClick={handleClickOpen}>사용설명서</Button>
+
         </Toolbar>
       </AppBar>
 
@@ -131,4 +136,4 @@ export default function Header() {
 }
 
 
-  //1126
+  //1128 

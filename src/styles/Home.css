@@ -1,4 +1,27 @@
 .main {
     background-color: white;
     height: 86%;
+
+}
+.bandi {
+        position: absolute;
+        top: 150px;
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        animation: bandi-spin infinite 20s linear;
+        height: 40vmin;
+        transform: translateX(60px);
+}
+
+.btn-home {
+    border: 1px solid #3f51b5;
+    background-color: rgba(63, 81, 181, 0.08);
+    transform: translateX(100%);
+    position: relative;
+    transform: translateX(100%);
+    top: 80%;
 }
