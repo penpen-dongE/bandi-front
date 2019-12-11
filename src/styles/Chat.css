@@ -1,52 +1,68 @@
 .chatwindow {
-    height: 430px;
-    padding: 10px;
+    height: 440px;
+    padding: 10px 12px 18px 0;
     overflow: auto;
     display: flex;
     flex-direction: column;
 }
 
-/*chatwindow2 는 MoreInfo.js 에만 적용 */
-.chatwindow2 {
-    display: flex;
-    flex-direction: column;
+#greeting {
+    margin-bottom: 18px;
 }
 
+.example {
+    background: #95bd3f;
+    width: 340px;
+    border-radius: 8px;
+    padding: 6px 12px 6px 12px;
+    color: #ffffff; 
+    margin-top: 10px;
+    font-size: 17px;
+    text-align: center;
+}
+
+#ex1 {
+    margin-top: 0px;
+}
+
+#ex3 {
+    margin-bottom: 18px;
+}
 
 .img1st, .img2nd {
     display: inline-block;
     vertical-align: middle;
 }
 
-.dialog1{
+.dialog1 {
     display: inline-flex;
     align-items: center;
 }
 
-.dialog2{
+.dialog2 {
     display: inline-flex;
     flex-direction: row-reverse;
 }
 
-.me, .bot, .ai { 
-    padding: 4px;
-    margin: 10px;
-    font-weight: bold;
-    color: white;
+.me, .bot { 
+    padding: 6px 12px 6px 12px;
+    border-radius: 8px;
+    font-family: NotoSans;
+    font-size: 15px;
+    line-height: 1.6;
+    letter-spacing: normal;
     word-wrap: break-word;
-    border-radius: 10px;
-    padding:10px;
-	margin-top: 8px;
-    margin-bottom: 8px;
     position: relative;
     box-sizing : border-box;
-    max-width: 300px;
     display: inline-block; 
+    max-width: 310px;
 }
 
 .bot {
-    background: #009688;
+    background: #d8d8d8;
     margin-right: auto; 
+    margin-left: 10px;
+    color: #000000;
 }
 
 .bot:after, .bot:before {
@@ -60,31 +76,15 @@
     pointer-events: none;
     border-width: 5px;
     margin-top: -3px;
-    border-right-color: #009688;
-}
-
-.ai {
-    background: #cddc39;
-    margin-right: auto; 
-}
-
-.ai:after, .ai:before {
-	right: 100%;
-	top: 50%;
-	border: solid transparent;
-	content: " ";
-	height: 0;
-	width: 0;
-	position: absolute;
-    pointer-events: none;
-    border-width: 5px;
-    margin-top: -3px;
-    border-right-color:#cddc39;
+    border-right-color:#d8d8d8;
 }
 
 .me {
-    background-color:#01579b ;  
+    background-color:#688b1d ;  
     margin-left: auto;
+    margin-right:10px;
+    margin-bottom: 18px;
+    color: #ffffff;
 }
 
 .me:after, .me:before {
@@ -98,29 +98,31 @@
     pointer-events: none;
     border-width: 5px;
     margin-top: -3px;
-    border-left-color: #01579b;
+    border-left-color: #688b1d;
 }
 
-.input{
+.input {
     display: flex;
-    justify-content: flex-start;   
+    justify-content: flex-start;  
+    align-items: center; 
 }
 
 .text {
-    padding-left: 20px;
-    width: 200px;
+    padding-left: 10px;
+}
+
+input {
+    width: 240px;
+    border: 0;
+    border-bottom: solid 1px #979797;
+    padding: 10px;
+    font-size: 15px;
 }
 
 .btn {
     margin-left: 10px;
-    margin-right: 10px;
-    
 }
 
-#snackbar{
-    left: 50%;
-    opacity: 1;
-    /* transform: none; */
-    transition: opacity 225ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, transform 150ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
-    transform: translateX(-50%)
-}
+
+/**/
+

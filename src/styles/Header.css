@@ -1,0 +1,33 @@
+.top {
+    display: flex;
+}
+
+@font-face{
+    font-family: "BMJUA";
+    src: url("./fonts/BMJUA.ttf") format("truetype");
+}
+.topTitle {
+    width: 200px;
+    height: 54px;
+    font-family: 'BMJUA';
+    color: #95bd3f;
+    font-size: 32px;
+    margin-left: 15px;
+    margin-top: 10px;
+}
+
+.topBtn1, .topBtn2 {
+    width: 100px;
+    height: 54px;
+    object-fit: contain;
+    font-family: 'BMJUA';
+    color: #95bd3f;
+    font-size: 20px;
+    background-color: white;
+    border-right: 8px;
+    border-bottom: 8px;
+}
+
+.topBtn2 {
+    border-radius: 0 8px 0 0;
+}

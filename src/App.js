@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
 import { BrowserRouter } from 'react-router-dom';
 import Header from './components/Header';
-// import Family from './components/Family';
 import Nickname from './components/Nickname';
 import './styles/App.css';
-// import LifecycleAndFamily from './components/LifecycleAndFamily';
 import Chat from './components/Chat';
 
 class App extends Component {
@@ -34,18 +32,21 @@ class App extends Component {
 
   render() {
     let { chatState } = this.state;
+    console.log(chatState);
     if (!chatState) {
       return (
-        <div className="bandibot" >
-          <React.Fragment>
-            <div className="header">
-              <Header />
-            </div>
-            <div className="nickname">
-              <Nickname onChange={this._chatStateChange} />
-            </div>
-          </React.Fragment>
-        </div>
+        <BrowserRouter>
+          <div className="bandibot">
+            <React.Fragment>
+              <div className="header">
+                <Header />
+              </div>
+              <div className="nickname">
+                <Nickname onChange={this._chatStateChange} />
+              </div>
+            </React.Fragment>
+          </div>
+        </BrowserRouter>
       );
     } else {
       return (

@@ -1,0 +1,100 @@
+.ai { 
+    background: #688b1d;
+    width: 360px;
+    height: 140px;
+    border-radius: 8px;
+    color: #ffffff;
+    padding: 6px 12px 6px 12px;
+    border-radius: 8px;
+    font-family: 'NotoSans';
+    font-size: 15px;
+    line-height: 1.6;
+    letter-spacing: normal;
+    word-wrap: break-word;
+    position: relative;
+    box-sizing : border-box;
+    display: inline-block; 
+    margin-bottom: 18px;
+}
+
+.chatwindow2 {
+    display: flex;
+    flex-direction: column;
+}  
+
+#ai2 {
+    height: 77px; 
+    margin-bottom: 5px;
+}
+
+.aiQuestion {
+    display: flex;
+}
+@font-face{
+    font-family: "BMJUAOTF";
+    src: url("./fonts/BMJUA.otf") format("opentype");
+}
+#AI {
+    width: 43px;
+    height: 43px;
+    object-fit: contain;
+    font-family: BMJUAOTF;
+    font-size: 43px;
+    color: #95bd3f;
+    margin-left: 12px;
+}
+
+#aiText{
+    margin: 7px;
+}
+
+.aiBtn {
+    width: 334px;
+    height: 39px;
+    border-radius: 4px;
+    background-color: #a3dc2a;  
+    font-family: BMJUAOTF;
+    font-size: 21px;
+    color: #ffffff;
+}
+
+.recombtn {
+    width: 360px;
+    border-radius: 8px;
+    background: #688b1d;
+    display: flex;
+    margin-top: 8px;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 10px;
+}
+
+#recommend3 {
+    margin-bottom: 18px;
+}
+
+.recommend {
+    width: 270px;
+    background-color: #a3dc2a;
+    font-family: NotoSans;
+    font-size: 15.5px;
+    font-weight: bold;
+    color: #ffffff;
+    line-height: 1.33;
+    border-radius: 8px 0px 0px 8px;
+    text-align: left;
+    padding: 10px 10px 10px 15px;
+}
+
+.percent {
+    width: 80px;
+    background: #688b1d;
+    border-radius: 0px 8px 8px 0px;
+    font-size: 15px;
+    color: #ffffff;
+    padding-left: 15px;
+}
+
+#nextbot {
+    margin-bottom: 18px;
+}

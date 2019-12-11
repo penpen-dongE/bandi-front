@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import Button from '@material-ui/core/Button';
-import "./../styles/Chat.css";
+import "./../styles/MoreInfo.css";
 import bandi from '../assets/bandi_imo.png';
-import ddImg3 from '../assets/ddd3.png';
+
 
 export default class MoreInfo extends Component {
     constructor(props) {
@@ -13,9 +12,34 @@ export default class MoreInfo extends Component {
             thisIs: [],
             chatText: '',
             messages: [],
+            p1: '',
+            p2: '',
+            p3: ''
+
         }
         this._clickButton = this._clickButton.bind(this);
         this._moreClicked = this._moreClicked.bind(this);
+        this.similarity = this.similarity.bind(this)
+    }
+
+    componentDidMount() {
+        this.scrollToBottom();
+    }
+    componentDidUpdate() {
+        this.scrollToBottom();
+    }
+    scrollToBottom() {
+        this.el && this.el.scrollIntoView({ behavior: 'smooth' });
+    }
+
+    similarity() {
+        for (let i = this.props.messages.length - 1; i >= 0; i--) {
+            if (this.props.messages[i].from === 'ai') {
+                this.p1 = Math.floor(this.props.messages[i].text[3] * 100);
+                this.p2 = Math.floor(this.props.messages[i].text[4] * 100);
+                this.p3 = Math.floor(this.props.messages[i].text[5] * 100);
+            }
+        }
 
     }
 
@@ -27,13 +51,11 @@ export default class MoreInfo extends Component {
         })
         for (let i = this.props.messages.length - 1; i >= 0; i--) {
             if (this.props.messages[i].from === 'ai') {
-                console.log(this.props.messages[i].text)
                 return this.setState({ thisIs: this.props.messages[i].text })
             }
         }
 
     }
-
 
     _moreClicked(m) {
         this.setState({
@@ -46,7 +68,7 @@ export default class MoreInfo extends Component {
                 text: chatText,
             }),
         }))
-        axios.post("http://13.125.247.24:9000/chat", { chatText: m })
+        axios.post("http://bandibotsv.shop:9000/chat", { chatText: m })
             .then((response) => {
                 console.log(response.data)
 
@@ -68,37 +90,49 @@ export default class MoreInfo extends Component {
     }
     render() {
         let { token } = this.state;
-
+        this.similarity()
         let a = this.state.thisIs[0];
         let b = this.state.thisIs[1];
         let c = this.state.thisIs[2];
 
-        const moreButtons = [a, b, c];
+        //const moreButtons = [a, b, c];
 
         if (!token) {
+
             return (
-                <div className='ai' >
-                    관련된 다른 정책이 궁금하신가요?
-                <Button title="moreinfo" variant="outlined"
-                        color="primary" size="large"
-                        onClick={this._clickButton}>궁금해요</Button>
+
+                <div className='ai'>
+                    <div className='aiQuestion'>
+                        <div id='AI'>AI</div>
+                        <div id='aiText'>{`인공지능이 문의하신 내용과 최대 70% 일치하는 정책을 찾았어요! 보여드릴까요?`}</div>
+                    </div>
+                    <button className='aiBtn' onClick={this._clickButton}>보여주세요</button>
                 </div>
             );
         } else {
             return (
                 <React.Fragment>
                     <div className='wrapper'>
-                        <div className='btn'>
-                            {
-                                moreButtons.map(m => (
-                                    <Button title="moreinfolist" variant="outlined"
-                                        color="primary" size="large" value={m}
-                                        onClick={() => this._moreClicked(m)}>
-                                        {m}
-                                    </Button>
-                                ))
-                            }
+
+                        <div className='ai' id='ai2'>
+                            <div className='aiQuestion'>
+                                <div id='AI'>AI</div>
+                                <div id='aiText'>{`인공지능이 문의하신 내용과 최대 70% 일치하는 정책을 찾았어요! 보여드릴까요?`}</div>
+                            </div>
                         </div>
+                        <div className='recombtn'>
+                            <button className='recommend' value={a} onClick={() => this._moreClicked(a)}>{a}</button>
+                            <div className='percent'>{`70% 일치`}</div>
+                        </div>
+                        <div className='recombtn'>
+                            <button className='recommend' value={b} onClick={() => this._moreClicked(b)}>{b}</button>
+                            <div className='percent'>{`${this.p2}% 일치`}</div>
+                        </div>
+                        <div className='recombtn' id='recommend3'>
+                            <button className='recommend' value={c} onClick={() => this._moreClicked(c)}>{c}</button>
+                            <div className='percent'>{`${this.p3}% 일치`}</div>
+                        </div>
+
                         {
                             this.state.messages.map((message, index) => {
                                 return (
@@ -113,7 +147,7 @@ export default class MoreInfo extends Component {
                                                 </div>
                                                 {
                                                     (message.from === 'bot') &&
-                                                    <div className={message.from} key={index}>
+                                                    <div className={message.from} key={index} id='nextbot'>
                                                         {message.text}
                                                     </div>
                                                 }
@@ -124,6 +158,7 @@ export default class MoreInfo extends Component {
                                 )
                             })
                         }
+                        <div ref={el => { this.el = el; }} />
                     </div>
                 </React.Fragment>
             );

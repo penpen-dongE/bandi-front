@@ -27,7 +27,7 @@ class Nickname extends Component {
 
         return (
             <React.Fragment>
-                <div className='nicknameSelect'>반디봇과 대화할 닉네임을 선택해 주세요</div>
+                <div className='nicknameSelect'>아바타를 선택해 주세요!</div>
                 <div className='wrapper'>
                     <NickButton
                         {...this.props}
